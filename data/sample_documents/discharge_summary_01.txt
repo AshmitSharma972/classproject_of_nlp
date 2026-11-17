@@ -1,0 +1,32 @@
+PATIENT DISCHARGE SUMMARY
+
+Patient Name: Fictional Patient A
+Date of Admission: 2026-08-25
+Date of Discharge: 2026-08-28
+
+Chief Complaint:
+Patient presents with acute chest pain and severe shortness of breath radiating to the left arm for 4 hours.
+
+History of Present Illness:
+The patient is a 58-year-old male with a known past medical history of hypertension and type 2 diabetes. He experienced sudden onset retrosternal chest tightness accompanied by diaphoresis. Patient had fever last week but currently denies fever. Denies nausea or vomiting.
+
+Current Medications:
+- Lisinopril 20 mg daily
+- Metformin 500 mg twice daily
+- Aspirin 81 mg daily
+
+Allergies:
+- Penicillin (causes severe skin rash)
+
+Physical Examination & Diagnostic Tests:
+- Blood Pressure: 155/95 mmHg
+- Heart Rate: 98 bpm
+- ECG: ST-segment elevation in anterior leads (acute MI)
+- Troponin I: 4.5 ng/ml (elevated)
+- Chest X-Ray: Clear lungs, no pulmonary edema
+
+Hospital Course & Procedures:
+The patient underwent urgent Percutaneous Coronary Intervention (PCI) with stent placement in the left anterior descending artery. Post-procedure course was uneventful. Chest pain resolved completely.
+
+Discharge Instructions:
+Continue current medications. Added Clopidogrel 75 mg daily and Atorvastatin 40 mg daily. Follow up in cardiology clinic in 2 weeks.

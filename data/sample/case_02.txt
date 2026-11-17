@@ -1,0 +1,6 @@
+Patient is a 58-year-old female with a known history of type 2 diabetes mellitus and hypertension, both diagnosed approximately 10 years ago.
+She is currently on metformin 500 mg twice daily for diabetes and amlodipine 5 mg once daily for blood pressure control.
+She presents today for a routine follow-up and reports good medication compliance.
+Her fasting blood glucose this morning was 138 mg/dL, and her blood pressure on arrival was 142/88 mmHg.
+She denies any episodes of hypoglycemia, chest pain, or swelling of the feet.
+She was advised to continue her current medications and return in 3 months for repeat labs.

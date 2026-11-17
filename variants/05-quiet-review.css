@@ -1,0 +1,10 @@
+:root { --teal: #416b70; --teal-dark: #34575b; --teal-soft: #e2ecec; --radius: 10px; --shadow: 0 9px 25px rgba(20,57,61,.06); }
+.page { max-width: 1000px; padding-top: 38px; }
+.intro { max-width: 600px; }
+h1 { font-size: clamp(30px, 4vw, 44px); font-weight: 650; }
+.notice { background: var(--surface); }
+.panel-main { padding: 26px; }
+.workspace { grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr); }
+.panel-side { background: transparent; box-shadow: none; }
+.panel-side .side-title { font-size: 13px; }
+.stage-index { border-radius: 8px; }

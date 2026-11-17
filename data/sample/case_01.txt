@@ -1,0 +1,7 @@
+Patient is a 34-year-old male who presents with fever and cough for the past 5 days.
+He reports the fever started suddenly and has been persistent, reaching up to 102°F at its peak.
+The cough is dry and non-productive, worsening at night.
+He denies any vomiting, nausea, or diarrhea.
+There is no associated chest pain or difficulty breathing.
+He has not taken any medications for the current illness.
+He was seen at a local clinic two days ago and was advised rest and fluids.

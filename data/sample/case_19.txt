@@ -1,0 +1,7 @@
+Patient is a 64-year-old male with a known case of coronary artery disease, first diagnosed after he presented with a myocardial infarction in 2016.
+He underwent coronary artery bypass grafting (CABG) in 2018 after catheterization revealed triple vessel disease.
+He is currently on aspirin 75 mg once daily and atorvastatin 40 mg at bedtime, which he has been taking without interruption since surgery.
+He also takes metoprolol succinate 50 mg once daily and ramipril 5 mg once daily for post-MI cardiac protection.
+He denies any angina, palpitations, or exertional chest pain at rest.
+His last echocardiogram 6 months ago showed an ejection fraction of 52%.
+He is followed up regularly by his cardiologist and reports good functional status with no limitations in daily activities.

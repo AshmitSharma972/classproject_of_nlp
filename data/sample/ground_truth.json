@@ -1,0 +1,844 @@
+{
+  "case_01": {
+    "entities": [
+      {"text": "fever", "type": "SYMPTOM"},
+      {"text": "cough", "type": "SYMPTOM"},
+      {"text": "vomiting", "type": "SYMPTOM"},
+      {"text": "nausea", "type": "SYMPTOM"},
+      {"text": "diarrhea", "type": "SYMPTOM"},
+      {"text": "chest pain", "type": "SYMPTOM"},
+      {"text": "difficulty breathing", "type": "SYMPTOM"}
+    ],
+    "assertions": [
+      {"entity_text": "fever", "status": "PRESENT"},
+      {"entity_text": "cough", "status": "PRESENT"},
+      {"entity_text": "vomiting", "status": "NEGATED"},
+      {"entity_text": "nausea", "status": "NEGATED"},
+      {"entity_text": "diarrhea", "status": "NEGATED"},
+      {"entity_text": "chest pain", "status": "NEGATED"},
+      {"entity_text": "difficulty breathing", "status": "NEGATED"}
+    ],
+    "temporal": [
+      {"raw_value": "5 days", "type": "DURATION", "normalized_value": "P5D"},
+      {"raw_value": "two days ago", "type": "RELATIVE_TIME", "normalized_value": "-2D"},
+      {"raw_value": "at night", "type": "TIME_OF_DAY", "normalized_value": "night"}
+    ],
+    "relations": [
+      {"head": "fever", "tail": "5 days", "type": "SYMPTOM-DURATION"},
+      {"head": "cough", "tail": "5 days", "type": "SYMPTOM-DURATION"},
+      {"head": "fever", "tail": "102°F", "type": "SYMPTOM-SEVERITY"},
+      {"head": "cough", "tail": "night", "type": "SYMPTOM-TIME"}
+    ],
+    "sections": {
+      "Chief Complaint": ["fever", "cough"],
+      "ROS": ["vomiting (negated)", "nausea (negated)", "diarrhea (negated)", "chest pain (negated)", "difficulty breathing (negated)"]
+    }
+  },
+
+  "case_02": {
+    "entities": [
+      {"text": "type 2 diabetes mellitus", "type": "DISEASE"},
+      {"text": "hypertension", "type": "DISEASE"},
+      {"text": "metformin", "type": "MEDICATION"},
+      {"text": "amlodipine", "type": "MEDICATION"},
+      {"text": "hypoglycemia", "type": "SYMPTOM"},
+      {"text": "chest pain", "type": "SYMPTOM"},
+      {"text": "swelling of the feet", "type": "SYMPTOM"}
+    ],
+    "assertions": [
+      {"entity_text": "type 2 diabetes mellitus", "status": "PRESENT"},
+      {"entity_text": "hypertension", "status": "PRESENT"},
+      {"entity_text": "metformin", "status": "PRESENT"},
+      {"entity_text": "amlodipine", "status": "PRESENT"},
+      {"entity_text": "hypoglycemia", "status": "NEGATED"},
+      {"entity_text": "chest pain", "status": "NEGATED"},
+      {"entity_text": "swelling of the feet", "status": "NEGATED"}
+    ],
+    "temporal": [
+      {"raw_value": "approximately 10 years ago", "type": "RELATIVE_TIME", "normalized_value": "-10Y"},
+      {"raw_value": "3 months", "type": "DURATION", "normalized_value": "P3M"}
+    ],
+    "medications": [
+      {"drug": "metformin", "dose": "500 mg", "frequency": "twice daily", "indication": "type 2 diabetes mellitus"},
+      {"drug": "amlodipine", "dose": "5 mg", "frequency": "once daily", "indication": "hypertension"}
+    ],
+    "lab_results": [
+      {"test": "fasting blood glucose", "value": "138 mg/dL"},
+      {"test": "blood pressure", "value": "142/88 mmHg"}
+    ],
+    "relations": [
+      {"head": "metformin", "tail": "type 2 diabetes mellitus", "type": "MEDICATION-INDICATION"},
+      {"head": "amlodipine", "tail": "hypertension", "type": "MEDICATION-INDICATION"}
+    ],
+    "sections": {
+      "Medical History": ["type 2 diabetes mellitus", "hypertension"],
+      "Medications": ["metformin 500 mg twice daily", "amlodipine 5 mg once daily"],
+      "ROS": ["hypoglycemia (negated)", "chest pain (negated)", "swelling of the feet (negated)"]
+    }
+  },
+
+  "case_03": {
+    "entities": [
+      {"text": "diabetes", "type": "DISEASE"},
+      {"text": "hypertension", "type": "DISEASE"},
+      {"text": "heart attack", "type": "DISEASE"},
+      {"text": "hypothyroidism", "type": "DISEASE"},
+      {"text": "insulin", "type": "MEDICATION"}
+    ],
+    "assertions": [
+      {"entity_text": "diabetes", "status": "FAMILY_HISTORY"},
+      {"entity_text": "hypertension", "status": "FAMILY_HISTORY"},
+      {"entity_text": "heart attack", "status": "FAMILY_HISTORY"},
+      {"entity_text": "hypothyroidism", "status": "FAMILY_HISTORY"},
+      {"entity_text": "insulin", "status": "PRESENT"}
+    ],
+    "temporal": [
+      {"raw_value": "late 40s", "type": "AGE_AT_ONSET", "normalized_value": "~45-49Y"},
+      {"raw_value": "at age 62", "type": "AGE_AT_ONSET", "normalized_value": "62Y"},
+      {"raw_value": "recently", "type": "RELATIVE_TIME", "normalized_value": "recent"}
+    ],
+    "family_history": [
+      {"relation": "father", "condition": "diabetes", "treatment": "insulin"},
+      {"relation": "mother", "condition": "hypertension"},
+      {"relation": "paternal grandfather", "condition": "heart attack", "outcome": "death", "age_at_event": "62"},
+      {"relation": "sister", "condition": "hypothyroidism"}
+    ],
+    "relations": [
+      {"head": "diabetes", "tail": "father", "type": "CONDITION-FAMILY_MEMBER"},
+      {"head": "hypertension", "tail": "mother", "type": "CONDITION-FAMILY_MEMBER"},
+      {"head": "heart attack", "tail": "paternal grandfather", "type": "CONDITION-FAMILY_MEMBER"},
+      {"head": "hypothyroidism", "tail": "sister", "type": "CONDITION-FAMILY_MEMBER"}
+    ],
+    "sections": {
+      "Family History": ["diabetes (father)", "hypertension (mother)", "heart attack (paternal grandfather)", "hypothyroidism (sister)"],
+      "Medical History": ["no chronic illness (patient)"]
+    }
+  },
+
+  "case_04": {
+    "entities": [
+      {"text": "fever", "type": "SYMPTOM"},
+      {"text": "chills", "type": "SYMPTOM"},
+      {"text": "bodyache", "type": "SYMPTOM"},
+      {"text": "abdominal discomfort", "type": "SYMPTOM"},
+      {"text": "malaria", "type": "DISEASE"},
+      {"text": "typhoid", "type": "DISEASE"}
+    ],
+    "assertions": [
+      {"entity_text": "fever", "status": "PRESENT"},
+      {"entity_text": "chills", "status": "PRESENT"},
+      {"entity_text": "bodyache", "status": "PRESENT"},
+      {"entity_text": "abdominal discomfort", "status": "PRESENT"},
+      {"entity_text": "malaria", "status": "POSSIBLE"},
+      {"entity_text": "typhoid", "status": "POSSIBLE"}
+    ],
+    "temporal": [
+      {"raw_value": "4 days", "type": "DURATION", "normalized_value": "P4D"}
+    ],
+    "relations": [
+      {"head": "fever", "tail": "4 days", "type": "SYMPTOM-DURATION"},
+      {"head": "malaria", "tail": "fever", "type": "DISEASE-SYMPTOM"},
+      {"head": "typhoid", "tail": "abdominal discomfort", "type": "DISEASE-SYMPTOM"}
+    ],
+    "sections": {
+      "Chief Complaint": ["fever", "chills", "bodyache"],
+      "Assessment": ["possibly malaria", "rule out typhoid"]
+    }
+  },
+
+  "case_05": {
+    "entities": [
+      {"text": "headaches", "type": "SYMPTOM"},
+      {"text": "chest pain", "type": "SYMPTOM"},
+      {"text": "shortness of breath", "type": "SYMPTOM"},
+      {"text": "palpitations", "type": "SYMPTOM"},
+      {"text": "asthma", "type": "DISEASE"},
+      {"text": "COPD", "type": "DISEASE"},
+      {"text": "seizures", "type": "SYMPTOM"},
+      {"text": "loss of consciousness", "type": "SYMPTOM"},
+      {"text": "weight loss", "type": "SYMPTOM"},
+      {"text": "night sweats", "type": "SYMPTOM"},
+      {"text": "surgery", "type": "PROCEDURE"}
+    ],
+    "assertions": [
+      {"entity_text": "headaches", "status": "PRESENT"},
+      {"entity_text": "chest pain", "status": "NEGATED"},
+      {"entity_text": "shortness of breath", "status": "NEGATED"},
+      {"entity_text": "palpitations", "status": "NEGATED"},
+      {"entity_text": "asthma", "status": "NEGATED"},
+      {"entity_text": "COPD", "status": "NEGATED"},
+      {"entity_text": "seizures", "status": "NEGATED"},
+      {"entity_text": "loss of consciousness", "status": "NEGATED"},
+      {"entity_text": "weight loss", "status": "NEGATED"},
+      {"entity_text": "night sweats", "status": "NEGATED"},
+      {"entity_text": "surgery", "status": "NEGATED"}
+    ],
+    "temporal": [],
+    "relations": [],
+    "sections": {
+      "Chief Complaint": ["headaches"],
+      "ROS": [
+        "chest pain (negated)", "shortness of breath (negated)", "palpitations (negated)",
+        "seizures (negated)", "loss of consciousness (negated)", "weight loss (negated)", "night sweats (negated)"
+      ],
+      "Medical History": ["asthma (negated)", "COPD (negated)", "surgery (negated)"]
+    }
+  },
+
+  "case_06": {
+    "entities": [
+      {"text": "fever", "type": "SYMPTOM"},
+      {"text": "throat pain", "type": "SYMPTOM"},
+      {"text": "Paracetamol", "type": "MEDICATION"},
+      {"text": "ibuprofen", "type": "MEDICATION"},
+      {"text": "amoxicillin", "type": "MEDICATION"},
+      {"text": "tonsillar enlargement", "type": "FINDING"}
+    ],
+    "assertions": [
+      {"entity_text": "fever", "status": "PRESENT"},
+      {"entity_text": "throat pain", "status": "PRESENT"},
+      {"entity_text": "Paracetamol", "status": "PRESENT"},
+      {"entity_text": "ibuprofen", "status": "PRESENT"},
+      {"entity_text": "amoxicillin", "status": "PRESENT"},
+      {"entity_text": "tonsillar enlargement", "status": "PRESENT"}
+    ],
+    "temporal": [
+      {"raw_value": "2 days", "type": "DURATION", "normalized_value": "P2D"},
+      {"raw_value": "3 days", "type": "DURATION", "normalized_value": "P3D"},
+      {"raw_value": "yesterday", "type": "RELATIVE_TIME", "normalized_value": "-1D"},
+      {"raw_value": "7 days", "type": "DURATION", "normalized_value": "P7D"}
+    ],
+    "medications": [
+      {"drug": "Paracetamol", "dose": "500 mg", "frequency": "three times a day", "duration": "3 days", "status": "PRIOR"},
+      {"drug": "ibuprofen", "dose": "400 mg", "frequency": "once", "duration": "1 day", "status": "PRIOR"},
+      {"drug": "amoxicillin", "dose": "500 mg", "frequency": "twice daily", "duration": "7 days", "status": "CURRENT"}
+    ],
+    "relations": [
+      {"head": "Paracetamol", "tail": "fever", "type": "MEDICATION-SYMPTOM"},
+      {"head": "ibuprofen", "tail": "throat pain", "type": "MEDICATION-SYMPTOM"},
+      {"head": "amoxicillin", "tail": "7 days", "type": "MEDICATION-DURATION"}
+    ],
+    "sections": {
+      "Chief Complaint": ["fever", "throat pain"],
+      "Medications": ["Paracetamol 500 mg TID x 3 days (prior)", "ibuprofen 400 mg once (prior)", "amoxicillin 500 mg BD x 7 days (current)"]
+    }
+  },
+
+  "case_07": {
+    "entities": [
+      {"text": "fatigue", "type": "SYMPTOM"},
+      {"text": "breathlessness on exertion", "type": "SYMPTOM"},
+      {"text": "anemia", "type": "DISEASE"},
+      {"text": "diabetes", "type": "DISEASE"},
+      {"text": "iron deficiency", "type": "DISEASE"},
+      {"text": "CBC", "type": "LAB_TEST"},
+      {"text": "hemoglobin", "type": "LAB_VALUE"},
+      {"text": "MCV", "type": "LAB_VALUE"},
+      {"text": "fasting blood sugar", "type": "LAB_TEST"},
+      {"text": "serum ferritin", "type": "LAB_VALUE"},
+      {"text": "HbA1c", "type": "LAB_VALUE"}
+    ],
+    "assertions": [
+      {"entity_text": "fatigue", "status": "PRESENT"},
+      {"entity_text": "breathlessness on exertion", "status": "PRESENT"},
+      {"entity_text": "anemia", "status": "PRESENT"},
+      {"entity_text": "diabetes", "status": "POSSIBLE"},
+      {"entity_text": "iron deficiency", "status": "PRESENT"}
+    ],
+    "temporal": [
+      {"raw_value": "last week", "type": "RELATIVE_TIME", "normalized_value": "-1W"}
+    ],
+    "lab_results": [
+      {"test": "hemoglobin", "value": "8.5 g/dL", "interpretation": "low"},
+      {"test": "MCV", "value": "72 fL", "interpretation": "low (microcytic)"},
+      {"test": "fasting blood sugar", "value": "180 mg/dL", "interpretation": "high"},
+      {"test": "serum ferritin", "value": "8 ng/mL", "interpretation": "low"},
+      {"test": "HbA1c", "value": "8.9%", "interpretation": "high"}
+    ],
+    "relations": [
+      {"head": "hemoglobin", "tail": "anemia", "type": "LAB-DISEASE"},
+      {"head": "serum ferritin", "tail": "iron deficiency", "type": "LAB-DISEASE"},
+      {"head": "HbA1c", "tail": "diabetes", "type": "LAB-DISEASE"},
+      {"head": "fatigue", "tail": "anemia", "type": "SYMPTOM-DISEASE"},
+      {"head": "breathlessness on exertion", "tail": "anemia", "type": "SYMPTOM-DISEASE"}
+    ],
+    "sections": {
+      "Chief Complaint": ["fatigue", "breathlessness on exertion"],
+      "Labs": ["CBC", "fasting blood sugar", "serum ferritin", "HbA1c"],
+      "Assessment": ["moderate anemia", "iron deficiency", "uncontrolled diabetes (possible)"]
+    }
+  },
+
+  "case_08": {
+    "entities": [
+      {"text": "abdominal pain", "type": "SYMPTOM"},
+      {"text": "appendectomy", "type": "PROCEDURE"},
+      {"text": "acute appendicitis", "type": "DISEASE"},
+      {"text": "colonoscopy", "type": "PROCEDURE"},
+      {"text": "polyps", "type": "FINDING"},
+      {"text": "cholecystectomy", "type": "PROCEDURE"},
+      {"text": "gallstones", "type": "DISEASE"},
+      {"text": "adhesions", "type": "DISEASE"}
+    ],
+    "assertions": [
+      {"entity_text": "abdominal pain", "status": "PRESENT"},
+      {"entity_text": "appendectomy", "status": "HISTORICAL"},
+      {"entity_text": "acute appendicitis", "status": "HISTORICAL"},
+      {"entity_text": "colonoscopy", "status": "HISTORICAL"},
+      {"entity_text": "polyps", "status": "HISTORICAL"},
+      {"entity_text": "cholecystectomy", "status": "HISTORICAL"},
+      {"entity_text": "gallstones", "status": "HISTORICAL"},
+      {"entity_text": "adhesions", "status": "POSSIBLE"}
+    ],
+    "temporal": [
+      {"raw_value": "in 2019", "type": "ABSOLUTE_DATE", "normalized_value": "2019"},
+      {"raw_value": "last year", "type": "RELATIVE_TIME", "normalized_value": "-1Y"},
+      {"raw_value": "in 2014", "type": "ABSOLUTE_DATE", "normalized_value": "2014"},
+      {"raw_value": "three days ago", "type": "RELATIVE_TIME", "normalized_value": "-3D"}
+    ],
+    "relations": [
+      {"head": "appendectomy", "tail": "2019", "type": "PROCEDURE-DATE"},
+      {"head": "colonoscopy", "tail": "last year", "type": "PROCEDURE-DATE"},
+      {"head": "cholecystectomy", "tail": "2014", "type": "PROCEDURE-DATE"},
+      {"head": "appendectomy", "tail": "acute appendicitis", "type": "PROCEDURE-INDICATION"},
+      {"head": "cholecystectomy", "tail": "gallstones", "type": "PROCEDURE-INDICATION"}
+    ],
+    "sections": {
+      "Chief Complaint": ["abdominal pain"],
+      "Surgical History": ["appendectomy (2019)", "colonoscopy (last year)", "cholecystectomy (2014)"]
+    }
+  },
+
+  "case_09": {
+    "entities": [
+      {"text": "cough", "type": "SYMPTOM"},
+      {"text": "low-grade fever", "type": "SYMPTOM"},
+      {"text": "tuberculosis", "type": "DISEASE"},
+      {"text": "hemoptysis", "type": "SYMPTOM"},
+      {"text": "night sweats", "type": "SYMPTOM"},
+      {"text": "weight loss", "type": "SYMPTOM"}
+    ],
+    "assertions": [
+      {"entity_text": "cough", "status": "PRESENT"},
+      {"entity_text": "low-grade fever", "status": "PRESENT"},
+      {"entity_text": "tuberculosis", "status": "HISTORICAL"},
+      {"entity_text": "hemoptysis", "status": "NEGATED"},
+      {"entity_text": "night sweats", "status": "NEGATED"},
+      {"entity_text": "weight loss", "status": "NEGATED"}
+    ],
+    "temporal": [
+      {"raw_value": "5 years ago", "type": "RELATIVE_TIME", "normalized_value": "-5Y"},
+      {"raw_value": "6-month course", "type": "DURATION", "normalized_value": "P6M"},
+      {"raw_value": "past 2 weeks", "type": "DURATION", "normalized_value": "P2W"}
+    ],
+    "relations": [
+      {"head": "tuberculosis", "tail": "5 years ago", "type": "DISEASE-DATE"},
+      {"head": "cough", "tail": "2 weeks", "type": "SYMPTOM-DURATION"}
+    ],
+    "sections": {
+      "Chief Complaint": ["cough", "low-grade fever"],
+      "Medical History": ["tuberculosis (5 years ago, recovered)"],
+      "ROS": ["hemoptysis (negated)", "night sweats (negated)", "weight loss (negated)"]
+    }
+  },
+
+  "case_10": {
+    "entities": [
+      {"text": "burning micturition", "type": "SYMPTOM"},
+      {"text": "increased frequency", "type": "SYMPTOM"},
+      {"text": "urinary tract infection", "type": "DISEASE"},
+      {"text": "penicillin", "type": "MEDICATION"},
+      {"text": "rash", "type": "SYMPTOM"},
+      {"text": "swelling", "type": "SYMPTOM"},
+      {"text": "sulfa drugs", "type": "MEDICATION"},
+      {"text": "nausea", "type": "SYMPTOM"},
+      {"text": "nitrofurantoin", "type": "MEDICATION"}
+    ],
+    "assertions": [
+      {"entity_text": "burning micturition", "status": "PRESENT"},
+      {"entity_text": "increased frequency", "status": "PRESENT"},
+      {"entity_text": "urinary tract infection", "status": "PRESENT"},
+      {"entity_text": "penicillin", "status": "ALLERGY"},
+      {"entity_text": "rash", "status": "ALLERGY_REACTION"},
+      {"entity_text": "swelling", "status": "ALLERGY_REACTION"},
+      {"entity_text": "sulfa drugs", "status": "INTOLERANCE"},
+      {"entity_text": "nitrofurantoin", "status": "PRESENT"}
+    ],
+    "temporal": [
+      {"raw_value": "5 days", "type": "DURATION", "normalized_value": "P5D"},
+      {"raw_value": "48 hours", "type": "DURATION", "normalized_value": "PT48H"}
+    ],
+    "medications": [
+      {"drug": "nitrofurantoin", "dose": "100 mg", "frequency": "twice daily", "duration": "5 days", "status": "CURRENT"}
+    ],
+    "allergies": [
+      {"drug": "penicillin", "reaction": "rash and swelling of face and lips", "severity": "MODERATE"},
+      {"drug": "sulfa drugs", "reaction": "nausea and stomach upset", "type": "INTOLERANCE"}
+    ],
+    "relations": [
+      {"head": "penicillin", "tail": "rash", "type": "DRUG-REACTION"},
+      {"head": "penicillin", "tail": "swelling", "type": "DRUG-REACTION"},
+      {"head": "nitrofurantoin", "tail": "urinary tract infection", "type": "MEDICATION-INDICATION"}
+    ],
+    "sections": {
+      "Chief Complaint": ["burning micturition", "increased frequency"],
+      "Allergies": ["penicillin (rash, swelling)", "sulfa drugs (intolerance)"],
+      "Medications": ["nitrofurantoin 100 mg BD x 5 days"]
+    }
+  },
+
+  "case_11": {
+    "entities": [
+      {"text": "chest pain", "type": "SYMPTOM"},
+      {"text": "shortness of breath", "type": "SYMPTOM"},
+      {"text": "diaphoresis", "type": "SYMPTOM"},
+      {"text": "nausea", "type": "SYMPTOM"},
+      {"text": "vomiting", "type": "SYMPTOM"},
+      {"text": "loss of consciousness", "type": "SYMPTOM"},
+      {"text": "ST-segment elevation", "type": "FINDING"},
+      {"text": "aspirin", "type": "MEDICATION"},
+      {"text": "nitrate", "type": "MEDICATION"}
+    ],
+    "assertions": [
+      {"entity_text": "chest pain", "status": "PRESENT"},
+      {"entity_text": "shortness of breath", "status": "PRESENT"},
+      {"entity_text": "diaphoresis", "status": "PRESENT"},
+      {"entity_text": "nausea", "status": "NEGATED"},
+      {"entity_text": "vomiting", "status": "NEGATED"},
+      {"entity_text": "loss of consciousness", "status": "NEGATED"},
+      {"entity_text": "ST-segment elevation", "status": "PRESENT"},
+      {"entity_text": "aspirin", "status": "PRESENT"},
+      {"entity_text": "nitrate", "status": "PRESENT"}
+    ],
+    "temporal": [
+      {"raw_value": "approximately 90 minutes ago", "type": "RELATIVE_TIME", "normalized_value": "-PT90M"}
+    ],
+    "severity": [
+      {"entity_text": "chest pain", "scale": "NRS", "value": "8/10", "modifier": "severe"},
+      {"entity_text": "shortness of breath", "modifier": "mild"},
+      {"entity_text": "diaphoresis", "modifier": "mild"}
+    ],
+    "medications": [
+      {"drug": "aspirin", "dose": "325 mg", "frequency": "once", "status": "CURRENT"},
+      {"drug": "sublingual nitrate", "frequency": "once", "status": "CURRENT"}
+    ],
+    "relations": [
+      {"head": "chest pain", "tail": "8/10", "type": "SYMPTOM-SEVERITY"},
+      {"head": "chest pain", "tail": "90 minutes ago", "type": "SYMPTOM-ONSET"},
+      {"head": "ST-segment elevation", "tail": "leads II, III, aVF", "type": "FINDING-LOCATION"}
+    ],
+    "sections": {
+      "Chief Complaint": ["chest pain (severe, 8/10)", "shortness of breath (mild)", "diaphoresis (mild)"],
+      "ROS": ["nausea (negated)", "vomiting (negated)", "loss of consciousness (negated)"],
+      "ECG": ["ST-segment elevation in leads II, III, aVF"]
+    }
+  },
+
+  "case_12": {
+    "entities": [
+      {"text": "fever", "type": "SYMPTOM"},
+      {"text": "cough", "type": "SYMPTOM"},
+      {"text": "nausea", "type": "SYMPTOM"},
+      {"text": "vomiting", "type": "SYMPTOM"},
+      {"text": "dysuria", "type": "SYMPTOM"},
+      {"text": "urinary frequency", "type": "SYMPTOM"},
+      {"text": "hematuria", "type": "SYMPTOM"},
+      {"text": "headache", "type": "SYMPTOM"},
+      {"text": "dizziness", "type": "SYMPTOM"},
+      {"text": "rashes", "type": "SYMPTOM"},
+      {"text": "joint pains", "type": "SYMPTOM"}
+    ],
+    "assertions": [
+      {"entity_text": "fever", "status": "NEGATED"},
+      {"entity_text": "cough", "status": "NEGATED"},
+      {"entity_text": "nausea", "status": "NEGATED"},
+      {"entity_text": "vomiting", "status": "NEGATED"},
+      {"entity_text": "dysuria", "status": "NEGATED"},
+      {"entity_text": "urinary frequency", "status": "NEGATED"},
+      {"entity_text": "hematuria", "status": "NEGATED"},
+      {"entity_text": "headache", "status": "NEGATED"},
+      {"entity_text": "dizziness", "status": "NEGATED"},
+      {"entity_text": "rashes", "status": "NEGATED"},
+      {"entity_text": "joint pains", "status": "NEGATED"}
+    ],
+    "temporal": [],
+    "relations": [],
+    "sections": {
+      "ROS": [
+        "fever (negated)", "cough (negated)", "nausea (negated)", "vomiting (negated)",
+        "dysuria (negated)", "urinary frequency (negated)", "hematuria (negated)",
+        "headache (negated)", "dizziness (negated)", "rashes (negated)", "joint pains (negated)"
+      ]
+    }
+  },
+
+  "case_13": {
+    "entities": [
+      {"text": "hypertension", "type": "DISEASE"},
+      {"text": "type 2 diabetes", "type": "DISEASE"},
+      {"text": "leg swelling", "type": "SYMPTOM"},
+      {"text": "fatigue", "type": "SYMPTOM"},
+      {"text": "myocardial infarction", "type": "DISEASE"},
+      {"text": "heart attack", "type": "DISEASE"},
+      {"text": "chronic kidney disease", "type": "DISEASE"},
+      {"text": "chest pain", "type": "SYMPTOM"},
+      {"text": "orthopnea", "type": "SYMPTOM"},
+      {"text": "metformin", "type": "MEDICATION"},
+      {"text": "losartan", "type": "MEDICATION"},
+      {"text": "atorvastatin", "type": "MEDICATION"},
+      {"text": "pitting pedal edema", "type": "FINDING"}
+    ],
+    "assertions": [
+      {"entity_text": "hypertension", "status": "PRESENT"},
+      {"entity_text": "type 2 diabetes", "status": "PRESENT"},
+      {"entity_text": "leg swelling", "status": "PRESENT"},
+      {"entity_text": "fatigue", "status": "PRESENT"},
+      {"entity_text": "myocardial infarction", "status": "HISTORICAL"},
+      {"entity_text": "heart attack", "status": "FAMILY_HISTORY"},
+      {"entity_text": "chronic kidney disease", "status": "FAMILY_HISTORY"},
+      {"entity_text": "chest pain", "status": "NEGATED"},
+      {"entity_text": "orthopnea", "status": "NEGATED"},
+      {"entity_text": "pitting pedal edema", "status": "PRESENT"}
+    ],
+    "temporal": [
+      {"raw_value": "past 2 weeks", "type": "DURATION", "normalized_value": "P2W"},
+      {"raw_value": "6 years ago", "type": "RELATIVE_TIME", "normalized_value": "-6Y"}
+    ],
+    "medications": [
+      {"drug": "metformin", "dose": "1000 mg", "frequency": "twice daily", "status": "CURRENT"},
+      {"drug": "losartan", "dose": "50 mg", "frequency": "once daily", "status": "CURRENT"},
+      {"drug": "atorvastatin", "dose": "40 mg", "frequency": "at night", "status": "CURRENT"}
+    ],
+    "family_history": [
+      {"relation": "father", "condition": "heart attack", "outcome": "death", "age_at_event": "58"},
+      {"relation": "mother", "condition": "chronic kidney disease"}
+    ],
+    "relations": [
+      {"head": "metformin", "tail": "type 2 diabetes", "type": "MEDICATION-INDICATION"},
+      {"head": "losartan", "tail": "hypertension", "type": "MEDICATION-INDICATION"},
+      {"head": "myocardial infarction", "tail": "6 years ago", "type": "DISEASE-DATE"},
+      {"head": "leg swelling", "tail": "2 weeks", "type": "SYMPTOM-DURATION"}
+    ],
+    "sections": {
+      "Chief Complaint": ["leg swelling", "fatigue"],
+      "Medical History": ["hypertension", "type 2 diabetes", "myocardial infarction (6 years ago)"],
+      "Family History": ["heart attack (father, age 58)", "chronic kidney disease (mother)"],
+      "Medications": ["metformin 1000 mg BD", "losartan 50 mg OD", "atorvastatin 40 mg at night"],
+      "ROS": ["chest pain (negated)", "orthopnea (negated)"]
+    }
+  },
+
+  "case_14": {
+    "entities": [
+      {"text": "fever", "type": "SYMPTOM"},
+      {"text": "bodyache", "type": "SYMPTOM"},
+      {"text": "dry cough", "type": "SYMPTOM"},
+      {"text": "sore throat", "type": "SYMPTOM"},
+      {"text": "chills", "type": "SYMPTOM"},
+      {"text": "rigors", "type": "SYMPTOM"},
+      {"text": "fatigue", "type": "SYMPTOM"},
+      {"text": "decreased appetite", "type": "SYMPTOM"},
+      {"text": "malaria", "type": "DISEASE"}
+    ],
+    "assertions": [
+      {"entity_text": "fever", "status": "PRESENT"},
+      {"entity_text": "bodyache", "status": "PRESENT"},
+      {"entity_text": "dry cough", "status": "PRESENT"},
+      {"entity_text": "sore throat", "status": "PRESENT"},
+      {"entity_text": "chills", "status": "PRESENT"},
+      {"entity_text": "rigors", "status": "PRESENT"},
+      {"entity_text": "fatigue", "status": "PRESENT"},
+      {"entity_text": "decreased appetite", "status": "PRESENT"},
+      {"entity_text": "malaria", "status": "POSSIBLE"}
+    ],
+    "temporal": [
+      {"raw_value": "5 days ago", "type": "RELATIVE_TIME", "normalized_value": "-5D"},
+      {"raw_value": "3 days later", "type": "RELATIVE_TIME", "normalized_value": "-2D"},
+      {"raw_value": "yesterday", "type": "RELATIVE_TIME", "normalized_value": "-1D"},
+      {"raw_value": "today", "type": "RELATIVE_TIME", "normalized_value": "0D"},
+      {"raw_value": "2 hours", "type": "DURATION", "normalized_value": "PT2H"},
+      {"raw_value": "10 days ago", "type": "RELATIVE_TIME", "normalized_value": "-10D"}
+    ],
+    "relations": [
+      {"head": "fever", "tail": "5 days ago", "type": "SYMPTOM-ONSET"},
+      {"head": "bodyache", "tail": "5 days ago", "type": "SYMPTOM-ONSET"},
+      {"head": "dry cough", "tail": "3 days later", "type": "SYMPTOM-ONSET"},
+      {"head": "sore throat", "tail": "3 days later", "type": "SYMPTOM-ONSET"},
+      {"head": "chills", "tail": "yesterday", "type": "SYMPTOM-ONSET"},
+      {"head": "rigors", "tail": "yesterday", "type": "SYMPTOM-ONSET"}
+    ],
+    "sections": {
+      "Chief Complaint": ["fever", "bodyache", "chills", "rigors"],
+      "History of Present Illness": [
+        "fever (5 days ago)", "bodyache (5 days ago)",
+        "dry cough (day 3)", "sore throat (day 3)",
+        "chills (yesterday)", "rigors (yesterday)"
+      ]
+    }
+  },
+
+  "case_15": {
+    "entities": [
+      {"text": "fever", "type": "SYMPTOM"},
+      {"text": "myalgia", "type": "SYMPTOM"},
+      {"text": "retro-orbital headache", "type": "SYMPTOM"},
+      {"text": "rash", "type": "SYMPTOM"},
+      {"text": "dengue fever", "type": "DISEASE"}
+    ],
+    "assertions": [
+      {"entity_text": "fever", "status": "PRESENT"},
+      {"entity_text": "myalgia", "status": "PRESENT"},
+      {"entity_text": "retro-orbital headache", "status": "PRESENT"},
+      {"entity_text": "rash", "status": "NEGATED"},
+      {"entity_text": "dengue fever", "status": "HISTORICAL"}
+    ],
+    "temporal": [
+      {"raw_value": "three days ago", "type": "RELATIVE_TIME", "normalized_value": "-3D"},
+      {"raw_value": "second day", "type": "RELATIVE_TIME", "normalized_value": "-2D"},
+      {"raw_value": "last year", "type": "RELATIVE_TIME", "normalized_value": "-1Y"},
+      {"raw_value": "day 4", "type": "RELATIVE_TIME", "normalized_value": "D4"}
+    ],
+    "anaphora": [
+      {"reference": "the fever", "resolved_to": "fever (current episode)"},
+      {"reference": "similar problem last year", "resolved_to": "dengue fever (prior episode)"},
+      {"reference": "his prior episode", "resolved_to": "dengue fever (prior episode)"}
+    ],
+    "relations": [
+      {"head": "fever", "tail": "three days ago", "type": "SYMPTOM-ONSET"},
+      {"head": "dengue fever", "tail": "last year", "type": "DISEASE-DATE"},
+      {"head": "dengue fever", "tail": "fever", "type": "DISEASE-SYMPTOM"},
+      {"head": "dengue fever", "tail": "myalgia", "type": "DISEASE-SYMPTOM"},
+      {"head": "dengue fever", "tail": "retro-orbital headache", "type": "DISEASE-SYMPTOM"},
+      {"head": "rash", "tail": "day 4", "type": "SYMPTOM-ONSET"}
+    ],
+    "sections": {
+      "Chief Complaint": ["fever"],
+      "History of Present Illness": ["fever (3 days, worsening)", "myalgia", "retro-orbital headache"],
+      "Medical History": ["dengue fever (last year)"]
+    }
+  },
+
+  "case_16": {
+    "entities": [
+      {"text": "breathlessness", "type": "SYMPTOM"},
+      {"text": "sputum production", "type": "SYMPTOM"},
+      {"text": "COPD", "type": "DISEASE"},
+      {"text": "infective exacerbation", "type": "DISEASE"},
+      {"text": "salbutamol", "type": "MEDICATION"},
+      {"text": "theophylline", "type": "MEDICATION"},
+      {"text": "smoking", "type": "SOCIAL_HISTORY"}
+    ],
+    "assertions": [
+      {"entity_text": "breathlessness", "status": "PRESENT"},
+      {"entity_text": "sputum production", "status": "PRESENT"},
+      {"entity_text": "COPD", "status": "PRESENT"},
+      {"entity_text": "infective exacerbation", "status": "POSSIBLE"},
+      {"entity_text": "salbutamol", "status": "PRESENT"},
+      {"entity_text": "theophylline", "status": "PRESENT"},
+      {"entity_text": "smoking", "status": "HISTORICAL"}
+    ],
+    "temporal": [
+      {"raw_value": "past 8 years", "type": "DURATION", "normalized_value": "P8Y"},
+      {"raw_value": "past 5 days", "type": "DURATION", "normalized_value": "P5D"},
+      {"raw_value": "last 3 days", "type": "DURATION", "normalized_value": "P3D"}
+    ],
+    "medications": [
+      {"drug": "salbutamol", "route": "inhaler", "frequency": "as needed (approx. twice daily)", "status": "CURRENT"},
+      {"drug": "theophylline", "dose": "200 mg", "frequency": "twice daily", "status": "CURRENT"}
+    ],
+    "lab_results": [
+      {"test": "oxygen saturation", "value": "91%", "interpretation": "low", "condition": "room air"}
+    ],
+    "relations": [
+      {"head": "COPD", "tail": "30-pack-year smoking", "type": "DISEASE-RISK_FACTOR"},
+      {"head": "salbutamol", "tail": "COPD", "type": "MEDICATION-INDICATION"},
+      {"head": "theophylline", "tail": "COPD", "type": "MEDICATION-INDICATION"},
+      {"head": "breathlessness", "tail": "5 days", "type": "SYMPTOM-DURATION"},
+      {"head": "sputum production", "tail": "3 days", "type": "SYMPTOM-DURATION"}
+    ],
+    "sections": {
+      "Chief Complaint": ["breathlessness (worsening)", "sputum production (greenish)"],
+      "Medical History": ["COPD (8 years)", "30-pack-year smoking history"],
+      "Medications": ["salbutamol inhaler PRN", "theophylline 200 mg BD"]
+    }
+  },
+
+  "case_17": {
+    "entities": [
+      {"text": "fever", "type": "SYMPTOM"},
+      {"text": "runny nose", "type": "SYMPTOM"},
+      {"text": "cough", "type": "SYMPTOM"},
+      {"text": "vomiting", "type": "SYMPTOM"},
+      {"text": "diarrhea", "type": "SYMPTOM"},
+      {"text": "paracetamol syrup", "type": "MEDICATION"}
+    ],
+    "assertions": [
+      {"entity_text": "fever", "status": "PRESENT"},
+      {"entity_text": "runny nose", "status": "PRESENT"},
+      {"entity_text": "cough", "status": "PRESENT"},
+      {"entity_text": "vomiting", "status": "NEGATED"},
+      {"entity_text": "diarrhea", "status": "NEGATED"},
+      {"entity_text": "paracetamol syrup", "status": "PRESENT"}
+    ],
+    "temporal": [
+      {"raw_value": "past 3 days", "type": "DURATION", "normalized_value": "P3D"},
+      {"raw_value": "yesterday", "type": "RELATIVE_TIME", "normalized_value": "-1D"},
+      {"raw_value": "every 6 hours", "type": "FREQUENCY", "normalized_value": "Q6H"}
+    ],
+    "patient_demographics": [
+      {"attribute": "age", "value": "8 years", "type": "PEDIATRIC"},
+      {"attribute": "narrator", "value": "parent"}
+    ],
+    "medications": [
+      {"drug": "paracetamol syrup", "formulation": "children's", "frequency": "every 6 hours", "status": "CURRENT"}
+    ],
+    "relations": [
+      {"head": "fever", "tail": "3 days", "type": "SYMPTOM-DURATION"},
+      {"head": "fever", "tail": "103°F", "type": "SYMPTOM-SEVERITY"},
+      {"head": "paracetamol syrup", "tail": "fever", "type": "MEDICATION-SYMPTOM"}
+    ],
+    "sections": {
+      "Chief Complaint": ["fever (3 days, up to 103°F)", "runny nose", "cough"],
+      "ROS": ["vomiting (negated)", "diarrhea (negated)"],
+      "Medications": ["children's paracetamol syrup Q6H"]
+    }
+  },
+
+  "case_18": {
+    "entities": [
+      {"text": "major depressive disorder", "type": "DISEASE"},
+      {"text": "depression", "type": "DISEASE"},
+      {"text": "anxiety", "type": "SYMPTOM"},
+      {"text": "suicidal ideation", "type": "SYMPTOM"},
+      {"text": "sertraline", "type": "MEDICATION"},
+      {"text": "manic episodes", "type": "SYMPTOM"},
+      {"text": "psychosis", "type": "DISEASE"}
+    ],
+    "assertions": [
+      {"entity_text": "major depressive disorder", "status": "PRESENT"},
+      {"entity_text": "anxiety", "status": "PRESENT"},
+      {"entity_text": "suicidal ideation", "status": "NEGATED"},
+      {"entity_text": "sertraline", "status": "PRESENT"},
+      {"entity_text": "manic episodes", "status": "NEGATED"},
+      {"entity_text": "psychosis", "status": "NEGATED"}
+    ],
+    "temporal": [
+      {"raw_value": "at age 24", "type": "AGE_AT_ONSET", "normalized_value": "24Y"},
+      {"raw_value": "past 18 months", "type": "DURATION", "normalized_value": "P18M"},
+      {"raw_value": "past month", "type": "DURATION", "normalized_value": "P1M"}
+    ],
+    "medications": [
+      {"drug": "sertraline", "dose": "50 mg", "frequency": "daily", "duration": "18 months", "status": "CURRENT"}
+    ],
+    "relations": [
+      {"head": "sertraline", "tail": "major depressive disorder", "type": "MEDICATION-INDICATION"},
+      {"head": "anxiety", "tail": "work stress", "type": "SYMPTOM-TRIGGER"},
+      {"head": "major depressive disorder", "tail": "age 24", "type": "DISEASE-ONSET"}
+    ],
+    "sections": {
+      "Medical History": ["major depressive disorder (onset age 24)"],
+      "Medications": ["sertraline 50 mg daily (18 months)"],
+      "Psychiatric ROS": ["suicidal ideation (negated)", "self-harm (negated)", "manic episodes (negated)", "psychosis (negated)"]
+    }
+  },
+
+  "case_19": {
+    "entities": [
+      {"text": "coronary artery disease", "type": "DISEASE"},
+      {"text": "myocardial infarction", "type": "DISEASE"},
+      {"text": "coronary artery bypass grafting", "type": "PROCEDURE"},
+      {"text": "CABG", "type": "PROCEDURE"},
+      {"text": "triple vessel disease", "type": "DISEASE"},
+      {"text": "aspirin", "type": "MEDICATION"},
+      {"text": "atorvastatin", "type": "MEDICATION"},
+      {"text": "metoprolol succinate", "type": "MEDICATION"},
+      {"text": "ramipril", "type": "MEDICATION"},
+      {"text": "angina", "type": "SYMPTOM"},
+      {"text": "palpitations", "type": "SYMPTOM"},
+      {"text": "chest pain", "type": "SYMPTOM"}
+    ],
+    "assertions": [
+      {"entity_text": "coronary artery disease", "status": "PRESENT"},
+      {"entity_text": "myocardial infarction", "status": "HISTORICAL"},
+      {"entity_text": "CABG", "status": "HISTORICAL"},
+      {"entity_text": "triple vessel disease", "status": "HISTORICAL"},
+      {"entity_text": "aspirin", "status": "PRESENT"},
+      {"entity_text": "atorvastatin", "status": "PRESENT"},
+      {"entity_text": "metoprolol succinate", "status": "PRESENT"},
+      {"entity_text": "ramipril", "status": "PRESENT"},
+      {"entity_text": "angina", "status": "NEGATED"},
+      {"entity_text": "palpitations", "status": "NEGATED"},
+      {"entity_text": "chest pain", "status": "NEGATED"}
+    ],
+    "temporal": [
+      {"raw_value": "in 2016", "type": "ABSOLUTE_DATE", "normalized_value": "2016"},
+      {"raw_value": "in 2018", "type": "ABSOLUTE_DATE", "normalized_value": "2018"},
+      {"raw_value": "6 months ago", "type": "RELATIVE_TIME", "normalized_value": "-6M"}
+    ],
+    "medications": [
+      {"drug": "aspirin", "dose": "75 mg", "frequency": "once daily", "status": "CURRENT"},
+      {"drug": "atorvastatin", "dose": "40 mg", "frequency": "at bedtime", "status": "CURRENT"},
+      {"drug": "metoprolol succinate", "dose": "50 mg", "frequency": "once daily", "status": "CURRENT"},
+      {"drug": "ramipril", "dose": "5 mg", "frequency": "once daily", "status": "CURRENT"}
+    ],
+    "lab_results": [
+      {"test": "echocardiogram - ejection fraction", "value": "52%", "interpretation": "normal", "date": "6 months ago"}
+    ],
+    "relations": [
+      {"head": "CABG", "tail": "2018", "type": "PROCEDURE-DATE"},
+      {"head": "myocardial infarction", "tail": "2016", "type": "DISEASE-DATE"},
+      {"head": "CABG", "tail": "triple vessel disease", "type": "PROCEDURE-INDICATION"},
+      {"head": "aspirin", "tail": "coronary artery disease", "type": "MEDICATION-INDICATION"},
+      {"head": "atorvastatin", "tail": "coronary artery disease", "type": "MEDICATION-INDICATION"}
+    ],
+    "sections": {
+      "Medical History": ["coronary artery disease", "myocardial infarction (2016)", "CABG (2018)"],
+      "Medications": ["aspirin 75 mg OD", "atorvastatin 40 mg at bedtime", "metoprolol succinate 50 mg OD", "ramipril 5 mg OD"],
+      "ROS": ["angina (negated)", "palpitations (negated)", "chest pain (negated)"]
+    }
+  },
+
+  "case_20": {
+    "entities": [
+      {"text": "cancer", "type": "DISEASE"},
+      {"text": "stroke", "type": "DISEASE"},
+      {"text": "chest pain", "type": "SYMPTOM"},
+      {"text": "palpitations", "type": "SYMPTOM"},
+      {"text": "hypertension", "type": "DISEASE"},
+      {"text": "atrial fibrillation", "type": "DISEASE"},
+      {"text": "apixaban", "type": "MEDICATION"},
+      {"text": "bisoprolol", "type": "MEDICATION"}
+    ],
+    "assertions": [
+      {"entity_text": "cancer", "status": "NEGATED_FAMILY_HISTORY"},
+      {"entity_text": "stroke", "status": "POSSIBLE_FAMILY_HISTORY"},
+      {"entity_text": "chest pain", "status": "NEGATED"},
+      {"entity_text": "palpitations", "status": "NEGATED"},
+      {"entity_text": "hypertension", "status": "PRESENT"},
+      {"entity_text": "atrial fibrillation", "status": "PRESENT"},
+      {"entity_text": "apixaban", "status": "PRESENT"},
+      {"entity_text": "bisoprolol", "status": "PRESENT"}
+    ],
+    "temporal": [],
+    "medications": [
+      {"drug": "apixaban", "dose": "5 mg", "frequency": "twice daily", "status": "CURRENT"},
+      {"drug": "bisoprolol", "dose": "5 mg", "frequency": "once daily", "status": "CURRENT"}
+    ],
+    "family_history": [
+      {"relation": "family", "condition": "cancer", "status": "NEGATED"},
+      {"relation": "father", "condition": "stroke", "status": "POSSIBLE", "note": "not formally confirmed"}
+    ],
+    "relations": [
+      {"head": "cancer", "tail": "family", "type": "CONDITION-FAMILY_MEMBER"},
+      {"head": "stroke", "tail": "father", "type": "CONDITION-FAMILY_MEMBER"},
+      {"head": "apixaban", "tail": "atrial fibrillation", "type": "MEDICATION-INDICATION"},
+      {"head": "bisoprolol", "tail": "atrial fibrillation", "type": "MEDICATION-INDICATION"}
+    ],
+    "sections": {
+      "Family History": ["cancer (no family history)", "stroke (father, possible — unconfirmed)"],
+      "ROS": ["chest pain (negated)", "palpitations (negated)"],
+      "Medical History": ["hypertension", "atrial fibrillation"],
+      "Medications": ["apixaban 5 mg BD", "bisoprolol 5 mg OD"]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+Patient is a 61-year-old male with a significant past surgical history presenting for abdominal pain evaluation.
+He underwent an appendectomy in 2019 for acute appendicitis.
+He had a colonoscopy last year, which showed two small benign polyps that were removed during the procedure.
+He also had a cholecystectomy in 2014 for symptomatic gallstones.
+He denies any complications from previous surgeries.
+Currently, he reports intermittent right lower quadrant pain that started three days ago.
+Imaging has been ordered to rule out post-surgical adhesions or a new pathology.

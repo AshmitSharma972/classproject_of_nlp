@@ -1,0 +1,66 @@
+{
+  "discharge_summary_01.txt": {
+    "entities": [
+      "chest pain",
+      "shortness of breath",
+      "hypertension",
+      "type 2 diabetes",
+      "lisinopril",
+      "metformin",
+      "aspirin",
+      "penicillin",
+      "ecg",
+      "troponin",
+      "pci"
+    ],
+    "summary": "A 58-year-old male with hypertension and type 2 diabetes presented with acute chest pain and shortness of breath. ECG showed ST elevation and troponin was 4.5 ng/ml. He underwent urgent PCI with stent placement. Patient denies current fever. Discharged on updated cardiac medications."
+  },
+  "cardiology_consult_02.docx": {
+    "entities": [
+      "dyspnea",
+      "edema",
+      "heart failure",
+      "hypertension",
+      "hyperlipidemia",
+      "furosemide",
+      "amlodipine",
+      "atorvastatin",
+      "sulfa"
+    ],
+    "summary": "Patient presents with progressive dyspnea and lower extremity edema due to decompensated heart failure with LVEF 35%. Furosemide dosage increased."
+  },
+  "lab_report_03.pdf": {
+    "entities": [
+      "hba1c",
+      "blood glucose",
+      "creatinine",
+      "cholesterol",
+      "triglycerides",
+      "diabetes",
+      "nephropathy"
+    ],
+    "summary": "Laboratory results indicate uncontrolled type 2 diabetes with elevated HbA1c 9.2%, fasting blood glucose 210 mg/dl, serum creatinine 1.8 mg/dl, and dyslipidemia."
+  },
+  "emergency_note_04.txt": {
+    "entities": [
+      "headache",
+      "dizziness",
+      "fever",
+      "asthma",
+      "albuterol",
+      "acetaminophen",
+      "ct scan"
+    ],
+    "summary": "Patient evaluated for persistent headache and dizziness for 5 days. History of childhood asthma. Head CT scan normal. Discharged with acetaminophen."
+  },
+  "outpatient_note_05.pdf": {
+    "entities": [
+      "joint pain",
+      "osteoarthritis",
+      "knee",
+      "omeprazole",
+      "ibuprofen"
+    ],
+    "summary": "Outpatient visit for annual checkup and right knee osteoarthritis pain. Physical exam showed crepitus without acute effusion. Managed with physical therapy and analgesics."
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "model_path": "models\\clinical_transformer_weights",
+  "dataset": "E:\\PROJECT_OF_THE_CLASS\\data\\synthetic_multilingual_clinical_cases.jsonl",
+  "target": "summary_en",
+  "split": "same seeded 5% test split as training script",
+  "samples_evaluated": 100,
+  "batch_size": 4,
+  "device": "cpu",
+  "overall": {
+    "rouge1_f1": 96.52,
+    "rouge2_f1": 93.6,
+    "rougeL_f1": 96.52
+  },
+  "per_language": {
+    "en": {
+      "samples": 43,
+      "rouge1_f1": 100.0,
+      "rouge2_f1": 100.0,
+      "rougeL_f1": 100.0
+    },
+    "hi": {
+      "samples": 29,
+      "rouge1_f1": 93.02,
+      "rouge2_f1": 87.41,
+      "rougeL_f1": 93.02
+    },
+    "kn": {
+      "samples": 28,
+      "rouge1_f1": 94.8,
+      "rouge2_f1": 90.19,
+      "rougeL_f1": 94.8
+    }
+  },
+  "completed_at": "2026-10-29T12:34:38.820526+00:00",
+  "notice": "Synthetic held-out ROUGE scores measure text overlap only; they are not clinical accuracy or clinical validation."
+}

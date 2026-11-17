@@ -1,0 +1,72 @@
+OUTPATIENT CONSULTATION NOTE
+
+Patient Name : Fictional Patient E
+Date of Visit: 2026-10-28
+Department   : General Medicine
+
+CHIEF COMPLAINT
+Patient is a 34-year-old female presenting with persistent fever for 7 days,
+productive cough with yellowish sputum, and fatigue.
+
+HISTORY OF PRESENT ILLNESS
+Onset was gradual, starting with mild sore throat 10 days ago which progressed
+to high-grade fever (up to 39.5 °C) for the past 7 days. Patient reports
+associated chills, night sweats, and loss of appetite. She denies hemoptysis,
+chest pain, or shortness of breath. No nausea or vomiting.
+
+PAST MEDICAL HISTORY
+- Type 2 Diabetes Mellitus (diagnosed 2019) — controlled on medication
+- Seasonal allergic rhinitis
+
+FAMILY HISTORY
+- Father: Hypertension and Coronary Artery Disease
+- Mother: Type 2 Diabetes
+
+CURRENT MEDICATIONS
+- Metformin 500 mg twice daily
+- Cetirizine 10 mg at night
+
+ALLERGIES
+- Sulfonamides (causes rash and swelling)
+- No known food allergies
+
+REVIEW OF SYSTEMS
+- Fever: Present, 7 days
+- Cough: Present, productive, yellowish sputum
+- Shortness of breath: Absent
+- Chest pain: Absent
+- Nausea/Vomiting: Absent
+- Diarrhoea: Absent
+
+VITAL SIGNS
+- Temperature : 38.9 °C
+- Blood Pressure: 118/76 mmHg
+- Heart Rate  : 92 bpm
+- Respiratory Rate: 18 breaths/min
+- SpO2        : 98% on room air
+
+PHYSICAL EXAMINATION
+General: Alert and oriented. Mild distress due to fever.
+Respiratory: Decreased air entry in right lower lobe. Dullness on percussion.
+Cardiovascular: Regular rate and rhythm. No murmurs.
+Abdomen: Soft, non-tender. No organomegaly.
+
+INVESTIGATIONS
+- Complete Blood Count: WBC 13,200 cells/μL (elevated), Neutrophils 82%
+- CRP: 84 mg/L (elevated)
+- Chest X-Ray: Right lower lobe consolidation — consistent with pneumonia
+- Blood Culture: Pending
+- HbA1c: 7.2% (adequate control)
+
+ASSESSMENT
+1. Community-Acquired Pneumonia (right lower lobe)
+2. Type 2 Diabetes Mellitus — well controlled
+
+PLAN
+- Admit for IV antibiotics: Amoxicillin-Clavulanate 1.2 g IV every 8 hours
+- Paracetamol 1 g IV/oral every 6 hours PRN fever
+- Continue Metformin 500 mg twice daily
+- Monitor blood glucose closely
+- Repeat CBC and CRP in 48 hours
+- Sputum culture sent
+- Follow up with chest X-ray in 6 weeks to confirm resolution

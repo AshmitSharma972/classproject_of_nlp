@@ -1,0 +1,60 @@
+{"case_id": "en-01", "language": "English", "text": "No fever today.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-02", "language": "English", "text": "The patient denies chest pain.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-03", "language": "English", "text": "Not only cough but also fever.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-04", "language": "English", "text": "Possible pneumonia was discussed.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-05", "language": "English", "text": "History of diabetes is reported.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-06", "language": "English", "text": "Mother had diabetes.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-07", "language": "English", "text": "My father had hypertension.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-08", "language": "English", "text": "I have fever for five days.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-09", "language": "English", "text": "No diabetes, but cough is present.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-10", "language": "English", "text": "Metformin 500 mg twice daily and aspirin 75 mg once daily.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-11", "language": "English", "text": "Metformin 500 mg, aspirin 75 mg, and amlodipine 5 mg daily.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-12", "language": "English", "text": "BP 140/90 mmHg today.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-13", "language": "English", "text": "HTN is noted in the chart.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-14", "language": "English", "text": "DM was reported previously.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-15", "language": "English", "text": "SOB began this morning.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-16", "language": "English", "text": "Patient c/o headache.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-17", "language": "English", "text": "Family h/o asthma.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-18", "language": "English", "text": "T2DM for ten years.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-19", "language": "English", "text": "Take medication bid as documented.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-20", "language": "English", "text": "Medication is taken od per history.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-21", "language": "English", "text": "Fever for five days, no diabetes.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-22", "language": "English", "text": "Cough since yesterday.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-23", "language": "English", "text": "Abdominal pain for two weeks.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-24", "language": "English", "text": "No change in pain since Monday.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-25", "language": "English", "text": "Cannot deny nausea.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-26", "language": "English", "text": "Rule out tuberculosis is listed for review.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-27", "language": "English", "text": "No history of stroke.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-28", "language": "English", "text": "The patient has a rash and itching.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-29", "language": "English", "text": "Temperature is 38.2 C.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "en-30", "language": "English", "text": "Heart rate is 92 bpm.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-01", "language": "Hindi", "text": "मुझे पाँच दिनों से बुखार है।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-02", "language": "Hindi", "text": "मुझे खाँसी नहीं है।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-03", "language": "Hindi", "text": "मुझे मधुमेह का इतिहास है।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-04", "language": "Hindi", "text": "मेरी माँ को मधुमेह था।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-05", "language": "Hindi", "text": "संभावित निमोनिया का उल्लेख है।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-06", "language": "Hindi", "text": "सीने में दर्द से इनकार है।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-07", "language": "Hindi", "text": "मुझे दो सप्ताह से सिरदर्द है।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-08", "language": "Hindi", "text": "मुझे साँस लेने में तकलीफ़ है।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-09", "language": "Hindi", "text": "मुझे कोई एलर्जी नहीं है।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-10", "language": "Hindi", "text": "मेटफॉर्मिन 500 mg दिन में दो बार लेता हूँ।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-11", "language": "Hindi", "text": "रक्तचाप 140/90 mmHg है।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-12", "language": "Hindi", "text": "बुखार कल से है।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-13", "language": "Hindi", "text": "मुझे उल्टी नहीं है लेकिन मतली है।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-14", "language": "Hindi", "text": "पेनिसिलिन से एलर्जी है।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "hi-15", "language": "Hindi", "text": "मुझे उच्च रक्तचाप है।", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-01", "language": "Kannada", "text": "ನನಗೆ ಐದು ದಿನಗಳಿಂದ ಜ್ವರ ಇದೆ.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-02", "language": "Kannada", "text": "ನನಗೆ ಕೆಮ್ಮು ಇಲ್ಲ.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-03", "language": "Kannada", "text": "ನನಗೆ ಮಧುಮೇಹದ ಇತಿಹಾಸವಿದೆ.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-04", "language": "Kannada", "text": "ನನ್ನ ತಾಯಿಗೆ ಮಧುಮೇಹ ಇತ್ತು.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-05", "language": "Kannada", "text": "ಸಂಭಾವ್ಯ ನ್ಯುಮೋನಿಯಾ ಎಂದು ಉಲ್ಲೇಖಿಸಲಾಗಿದೆ.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-06", "language": "Kannada", "text": "ಎದೆನೋವನ್ನು ನಿರಾಕರಿಸುತ್ತಾರೆ.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-07", "language": "Kannada", "text": "ಎರಡು ವಾರಗಳಿಂದ ತಲೆನೋವು ಇದೆ.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-08", "language": "Kannada", "text": "ಉಸಿರಾಟದ ತೊಂದರೆ ಇದೆ.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-09", "language": "Kannada", "text": "ಯಾವುದೇ ಅಲರ್ಜಿ ಇಲ್ಲ.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-10", "language": "Kannada", "text": "ಮೆಟ್ಫಾರ್ಮಿನ್ 500 mg ದಿನಕ್ಕೆ ಎರಡು ಬಾರಿ ತೆಗೆದುಕೊಳ್ಳುತ್ತಾರೆ.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-11", "language": "Kannada", "text": "ರಕ್ತದೊತ್ತಡ 140/90 mmHg ಇದೆ.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-12", "language": "Kannada", "text": "ನಿನ್ನೆಿನಿಂದ ಜ್ವರ ಇದೆ.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-13", "language": "Kannada", "text": "ವಾಂತಿ ಇಲ್ಲ ಆದರೆ ವಾಕರಿಕೆ ಇದೆ.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-14", "language": "Kannada", "text": "ಪೆನಿಸಿಲಿನ್ ಅಲರ್ಜಿ ಇದೆ.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}
+{"case_id": "ka-15", "language": "Kannada", "text": "ಅಧಿಕ ರಕ್ತದೊತ್ತಡ ಇದೆ.", "english_text": null, "annotations": null, "review_status": "TODO: clinician annotation and approval"}

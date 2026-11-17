@@ -1,0 +1,7 @@
+Patient is a 67-year-old male with a 30-pack-year smoking history and a known diagnosis of COPD for the past 8 years.
+He is currently on salbutamol inhaler as needed for acute exacerbations and uses it approximately twice daily on most days.
+He is also on theophylline 200 mg twice daily as a maintenance bronchodilator.
+He presents today with increased breathlessness and more frequent inhaler use over the past 5 days.
+He reports greenish sputum production for the last 3 days, suggesting a possible infective exacerbation.
+His oxygen saturation on room air is 91%.
+He was admitted for IV antibiotics, nebulization, and close monitoring of respiratory status.

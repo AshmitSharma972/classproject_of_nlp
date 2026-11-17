@@ -1,0 +1,11 @@
+:root { --teal: #087f74; --teal-dark: #05675e; --teal-soft: #d5efeb; --radius: 8px; }
+body { font-size: 14px; }
+.page { max-width: 1240px; padding-top: 32px; }
+.intro { margin-bottom: 18px; }
+h1 { font-size: clamp(28px, 4vw, 42px); }
+.workspace { grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr); }
+.panel-main { padding: 24px; }
+.panel-side { top: 95px; }
+.pipeline { grid-template-columns: repeat(2, 1fr); }
+.stage { padding: 4px 0; }
+.results-top { padding: 17px 22px; }

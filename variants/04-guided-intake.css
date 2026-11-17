@@ -1,0 +1,10 @@
+:root { --teal: #167a71; --teal-dark: #0d665f; --teal-soft: #d9f3ee; --radius: 22px; }
+.page { max-width: 860px; }
+.intro { text-align: center; margin: 0 auto 30px; }
+.intro p { margin-inline: auto; }
+.notice { max-width: 720px; margin-inline: auto; }
+.workspace { grid-template-columns: 1fr; }
+.panel-main { padding: clamp(24px, 6vw, 52px); }
+.panel-side { position: static; }
+.pipeline { grid-template-columns: repeat(3, 1fr); }
+.primary { min-height: 54px; border-radius: 999px; }

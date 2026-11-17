@@ -34,3 +34,14 @@ huggingface/
 # Data Outputs
 data/processed/*.json
 data/processed/*.txt
+
+# Large transformer model weights
+models/clinical_transformer_weights/model.safetensors
+
+# Python environment
+venv/
+.venv/
+__pycache__/
+
+# Logs
+*.log

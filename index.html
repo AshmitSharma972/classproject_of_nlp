@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <html lang="en">
 <head>
@@ -1356,3 +1357,1363 @@
   </script>
 </body>
 </html>
+=======
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f766e">
+  <title>ClinIQ — Clinical case intake</title>
+  <link id="variant-css" rel="stylesheet" href="variants/01-clinical-instrument.css">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f3f7f8;
+      --surface: #ffffff;
+      --surface-muted: #eaf2f3;
+      --ink: #163238;
+      --muted: #60777b;
+      --line: #d7e4e6;
+      --teal: #0f766e;
+      --teal-dark: #0b5e59;
+      --teal-soft: #d9f1ee;
+      --amber: #9a6700;
+      --amber-soft: #fff1cc;
+      --red: #b42318;
+      --red-soft: #fde4e2;
+      --green: #26734d;
+      --green-soft: #dff4e7;
+      --shadow: 0 18px 50px rgba(20, 57, 61, .10);
+      --radius: 14px;
+      --focus: 0 0 0 4px rgba(15, 118, 110, .20);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --bg: #102023;
+        --surface: #172b2e;
+        --surface-muted: #1d373a;
+        --ink: #e4f0ef;
+        --muted: #9ab2b3;
+        --line: #315255;
+        --teal: #48c6ba;
+        --teal-dark: #81ddd5;
+        --teal-soft: #153f3d;
+        --amber: #f1bd4e;
+        --amber-soft: #4d3e1d;
+        --red: #ff9388;
+        --red-soft: #4b2624;
+        --green: #7dd89f;
+        --green-soft: #1e4430;
+        --shadow: 0 18px 50px rgba(0, 0, 0, .22);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { min-width: 320px; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 20% -10%, rgba(72, 198, 186, .12), transparent 33rem),
+        var(--bg);
+      color: var(--ink);
+      font: 15px/1.55 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    button, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    button:focus-visible, textarea:focus-visible, select:focus-visible, input:focus-visible {
+      outline: none;
+      box-shadow: var(--focus);
+    }
+    .app-shell { min-height: 100vh; }
+    .app-nav { display: flex; gap: 8px; padding: 12px clamp(18px, 4vw, 56px) 0; overflow-x: auto; }
+    .nav-item { border: 0; background: transparent; color: var(--muted); padding: 9px 11px; border-bottom: 2px solid transparent; white-space: nowrap; font-size: 12px; }
+    .nav-item.active { color: var(--teal); border-color: var(--teal); font-weight: 760; }
+    .variant-picker { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 11px; }
+    .variant-picker select { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 8px; padding: 6px 8px; font-size: 11px; }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 18px clamp(18px, 4vw, 56px);
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--surface) 92%, transparent);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+    .brand { display: flex; align-items: center; gap: 11px; }
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 36px; height: 36px;
+      border-radius: 11px;
+      color: #fff;
+      background: var(--teal);
+      box-shadow: 0 8px 18px rgba(15, 118, 110, .24);
+      font-weight: 800;
+      letter-spacing: -.08em;
+    }
+    .brand-name { font-weight: 760; letter-spacing: -.03em; }
+    .brand-caption { color: var(--muted); font-size: 12px; }
+    .status-pill, .mini-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+    .page { width: min(1080px, calc(100% - 36px)); margin: 0 auto; padding: 54px 0 80px; }
+    .intro { max-width: 700px; margin-bottom: 30px; }
+    .eyebrow { color: var(--teal); font-size: 12px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { font-size: clamp(30px, 5vw, 52px); line-height: 1.04; letter-spacing: -.055em; margin: 10px 0 15px; max-width: 720px; }
+    .intro p { color: var(--muted); font-size: 16px; max-width: 620px; margin: 0; }
+    .notice {
+      display: flex; gap: 12px; align-items: flex-start;
+      padding: 13px 15px; border: 1px solid color-mix(in srgb, var(--amber) 35%, var(--line));
+      background: color-mix(in srgb, var(--amber-soft) 72%, var(--surface));
+      border-radius: 12px; color: var(--ink); margin: 22px 0 28px;
+    }
+    .notice strong { display: block; font-size: 13px; }
+    .notice span { color: var(--muted); font-size: 13px; }
+    .workspace { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(270px, .65fr); gap: 22px; align-items: start; }
+    .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .panel-main { padding: clamp(20px, 4vw, 34px); }
+    .panel-side { padding: 21px; position: sticky; top: 95px; }
+    .panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+    .panel-title { margin: 0; font-size: 18px; letter-spacing: -.025em; }
+    .panel-subtitle { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+    .lang-control { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; padding: 3px; background: var(--surface-muted); }
+    .lang-control button {
+      border: 0; background: transparent; color: var(--muted); border-radius: 7px; padding: 7px 10px; font-size: 12px;
+    }
+    .lang-control button.active { background: var(--surface); color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+    textarea {
+      width: 100%; min-height: 220px; resize: vertical; border: 1px solid var(--line); border-radius: 12px;
+      padding: 17px; background: var(--surface); color: var(--ink); line-height: 1.65;
+    }
+    textarea::placeholder { color: color-mix(in srgb, var(--muted) 75%, transparent); }
+    .field-foot { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); font-size: 12px; margin: 9px 2px 20px; }
+    .sample-label { font-size: 12px; color: var(--muted); margin-bottom: 9px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
+    .chip {
+      border: 1px solid var(--line); background: var(--surface); color: var(--muted); border-radius: 999px;
+      padding: 8px 11px; font-size: 12px; text-align: left; transition: .18s ease;
+    }
+    .chip:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-1px); }
+    .primary {
+      display: inline-flex; justify-content: center; align-items: center; gap: 9px;
+      width: 100%; min-height: 48px; border: 0; border-radius: 10px; color: #fff; background: var(--teal);
+      font-weight: 750; transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+      box-shadow: 0 8px 18px rgba(15,118,110,.20);
+    }
+    .primary:hover { background: var(--teal-dark); transform: translateY(-1px); }
+    .primary:disabled { opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; }
+    .secondary {
+      border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 9px; min-height: 40px; padding: 0 13px;
+    }
+    .side-title { margin: 0 0 13px; font-size: 14px; }
+    .pipeline { display: grid; gap: 9px; }
+    .stage { display: flex; gap: 10px; align-items: center; color: var(--muted); font-size: 12px; }
+    .stage-index {
+      display: grid; place-items: center; flex: 0 0 24px; height: 24px; border-radius: 50%;
+      background: var(--surface-muted); border: 1px solid var(--line); font-size: 11px; font-weight: 750;
+    }
+    .stage.done { color: var(--ink); }
+    .stage.done .stage-index { background: var(--teal-soft); color: var(--teal); border-color: transparent; }
+    .stage.active { color: var(--teal); font-weight: 700; }
+    .stage.active .stage-index { background: var(--teal); color: #fff; border-color: var(--teal); box-shadow: 0 0 0 5px color-mix(in srgb, var(--teal) 16%, transparent); }
+    .side-rule { border: 0; border-top: 1px solid var(--line); margin: 20px 0; }
+    .privacy-note { color: var(--muted); font-size: 12px; margin: 0; }
+    .privacy-note strong { color: var(--ink); }
+    .results { display: none; margin-top: 22px; animation: rise .45s ease both; }
+    .results.visible { display: block; }
+    @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    .results-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; padding: 22px; border-bottom: 1px solid var(--line); }
+    .result-kicker { color: var(--green); font-size: 12px; font-weight: 760; letter-spacing: .08em; text-transform: uppercase; }
+    .results h2 { margin: 4px 0; font-size: 22px; letter-spacing: -.035em; }
+    .results-top p { margin: 0; color: var(--muted); font-size: 13px; }
+    .result-body { padding: 22px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, .38fr); gap: 24px; }
+    .summary { color: var(--ink); line-height: 1.7; }
+    .summary strong { color: var(--teal-dark); }
+    .fact-list { display: grid; gap: 9px; }
+    .fact { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 9px; font-size: 13px; }
+    .fact:last-child { border: 0; }
+    .fact-label { color: var(--muted); }
+    .assertion { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+    .assertion i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+    .present { color: var(--green); } .present i { background: var(--green); }
+    .negated { color: var(--red); } .negated i { background: var(--red); }
+    .possible { color: var(--amber); } .possible i { background: var(--amber); }
+    .evidence { background: var(--surface-muted); border-radius: 12px; padding: 15px; }
+    .evidence h3 { margin: 0 0 8px; font-size: 13px; }
+    .evidence p { margin: 0; color: var(--muted); font-size: 13px; }
+    mark { background: color-mix(in srgb, var(--amber) 28%, transparent); color: inherit; border-radius: 3px; padding: 1px 3px; }
+    .progress-wrap { display: none; margin-top: 18px; }
+    .progress-wrap.visible { display: block; }
+    .progress-label { display: flex; justify-content: space-between; color: var(--muted); font-size: 12px; margin-bottom: 7px; }
+    .progress-track { height: 7px; border-radius: 999px; background: var(--surface-muted); overflow: hidden; }
+    .progress-bar { width: 0; height: 100%; border-radius: inherit; background: var(--teal); transition: width .4s ease; }
+    .voice-card, .translation-card, .feature-view { display: none; }
+    .voice-card.visible, .translation-card.visible, .feature-view.visible { display: block; }
+    .voice-card { margin: 0 0 18px; padding: 13px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface-muted); }
+    .voice-head { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+    .voice-label { font-size: 12px; font-weight: 750; }
+    .voice-status { color: var(--muted); font-size: 12px; }
+    .voice-meter { display: none; gap: 3px; height: 22px; align-items: center; }
+    .voice-meter span { width: 3px; height: 8px; border-radius: 3px; background: var(--teal); animation: meter .8s ease-in-out infinite alternate; }
+    .voice-meter span:nth-child(2n) { animation-delay: .15s; } .voice-meter span:nth-child(3n) { animation-delay: .3s; }
+    .voice-card.recording .voice-meter { display: flex; } .voice-card.recording .voice-status { color: var(--red); }
+    @keyframes meter { to { height: 21px; } }
+    .translation-card { margin: 0 0 18px; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    .translation-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+    .translation-pane { padding: 14px; min-height: 130px; }
+    .translation-pane + .translation-pane { border-left: 1px solid var(--line); background: var(--surface-muted); }
+    .translation-pane label { display: block; color: var(--muted); font-size: 11px; font-weight: 760; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 7px; }
+    .translation-pane p { margin: 0; font-size: 13px; white-space: pre-wrap; }
+    .translation-pane textarea { min-height: 100px; background: transparent; border: 0; padding: 0; resize: vertical; }
+    .translation-notice { padding: 10px 14px; border-top: 1px solid var(--line); color: var(--amber); font-size: 12px; }
+    .risk-badge { display: inline-block; margin: 3px 5px 3px 0; border-radius: 999px; padding: 3px 8px; font-size: 11px; font-weight: 750; }
+    .risk-badge.high { background: #fde7e7; color: #922b2b; }
+    .risk-badge.medium { background: #fff1cc; color: #704d00; }
+    .translation-confirm { display: flex; gap: 8px; align-items: flex-start; padding: 11px 14px; border-top: 1px solid var(--line); font-size: 12px; }
+    .translation-confirm input { margin-top: 3px; accent-color: var(--teal); }
+    .patient-details { border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin: 0 0 18px; background: var(--surface-muted); }
+    .patient-details h3 { margin: 0 0 12px; font-size: 15px; }
+    .patient-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .patient-field label { display: block; font-size: 11px; font-weight: 700; margin-bottom: 4px; color: var(--muted); }
+    .patient-field input, .patient-field select { width: 100%; min-height: 38px; }
+    .required-mark, .field-errors { color: var(--red); }
+    .field-errors { font-size: 12px; margin: 8px 0; }
+    .consent-row { display: flex; align-items: flex-start; gap: 8px; margin: 12px 0; font-size: 12px; }
+    .report-table { width: 100%; border-collapse: collapse; margin: 8px 0 18px; }
+    .report-table th, .report-table td { text-align: left; border-bottom: 1px solid var(--line); padding: 8px; vertical-align: top; }
+    .report-section { margin: 16px 0; }
+    .report-section h3 { margin: 6px 0; }
+    .unreviewed { display: inline-block; border-radius: 10px; background: #fff1cc; color: #704d00; padding: 2px 7px; font-size: 10px; }
+    .feature-view { margin-top: 18px; padding: 25px; }
+    .feature-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; margin-bottom: 20px; }
+    .feature-head h2 { margin: 0; font-size: 24px; letter-spacing: -.04em; }
+    .feature-head p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+    .metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .metric { padding: 16px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface-muted); }
+    .metric strong { display: block; font-size: 25px; letter-spacing: -.05em; } .metric span { color: var(--muted); font-size: 12px; }
+    .arch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .arch-step { padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-muted); }
+    .arch-step b { display: block; color: var(--teal); font-size: 12px; } .arch-step span { color: var(--muted); font-size: 12px; }
+    .upload-zone { border: 1px dashed var(--teal); border-radius: 12px; padding: 28px; text-align: center; color: var(--muted); background: var(--teal-soft); }
+    .result-tabs { display: flex; gap: 6px; padding: 13px 22px 0; overflow-x: auto; }
+    .result-tab { border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--muted); padding: 8px 9px; font-size: 12px; white-space: nowrap; }
+    .result-tab.active { color: var(--teal); border-color: var(--teal); font-weight: 750; }
+    .result-pane { display: none; padding: 22px; } .result-pane.active { display: block; }
+    @media print {
+      @page { size: A4; margin: 18mm 14mm; @top-left { content: string(patientName); } @top-right { content: string(reportId); } @bottom-right { content: "Page " counter(page) " of " counter(pages); font-size: 9pt; } }
+      body * { visibility: hidden !important; }
+      #print-report, #print-report * { visibility: visible !important; }
+      #print-report { display: block !important; position: absolute; left: 0; top: 0; width: 100%; color: #111; font: 11pt Georgia, serif; }
+      #print-report h1, #print-report h2 { page-break-after: avoid; }
+      #print-report section { margin: 12pt 0; page-break-inside: avoid; }
+      .running-patient { string-set: patientName content(text); }
+      .running-report { string-set: reportId content(text); }
+      #print-report button { display: none !important; }
+      #print-report .demo-watermark { display: block !important; position: fixed; top: 45%; left: 10%; transform: rotate(-30deg); opacity: .18; font-size: 32pt; }
+    }
+    .json-box { background: var(--surface-muted); border-radius: 10px; padding: 14px; overflow: auto; max-height: 300px; font: 12px/1.6 ui-monospace, SFMono-Regular, Consolas, monospace; white-space: pre-wrap; }
+    .review-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+    .review-actions { display: flex; gap: 6px; } .review-actions button { min-height: 34px; padding: 0 9px; font-size: 11px; }
+    .toast { position: fixed; right: 20px; bottom: 20px; max-width: min(360px, calc(100% - 40px)); padding: 13px 15px; background: var(--ink); color: var(--surface); border-radius: 10px; box-shadow: var(--shadow); transform: translateY(20px); opacity: 0; pointer-events: none; transition: .25s ease; font-size: 13px; z-index: 20; }
+    .toast.show { transform: none; opacity: 1; }
+    @media (max-width: 760px) {
+      .topbar { padding: 14px 18px; }
+      .brand-caption, .status-pill { display: none; }
+      .page { width: min(100% - 26px, 620px); padding-top: 34px; }
+      .workspace, .result-body { grid-template-columns: 1fr; }
+      .translation-grid, .metric-grid, .arch-grid { grid-template-columns: 1fr; }
+      .translation-pane + .translation-pane { border-left: 0; border-top: 1px solid var(--line); }
+      .panel-side { position: static; }
+      .panel-head, .results-top { flex-direction: column; }
+      .lang-control { align-self: flex-start; }
+      h1 { font-size: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand" aria-label="ClinIQ">
+        <div class="brand-mark" aria-hidden="true">C·</div>
+        <div><div class="brand-name">ClinIQ</div><div class="brand-caption">Evidence-aware case intake</div></div>
+      </div>
+      <div class="variant-picker"><label for="variant">Direction</label><select id="variant"><option value="01">Clinical instrument</option><option value="02">Evidence editorial</option><option value="03">Operator console</option><option value="04">Guided intake</option><option value="05">Quiet review</option></select></div>
+      <div class="status-pill"><span class="status-dot" aria-hidden="true"></span> Local draft ready</div>
+    </header>
+    <nav class="app-nav" aria-label="Primary">
+      <button class="nav-item active" data-view="intake">Case intake</button>
+      <button class="nav-item" data-view="benchmark">Benchmark</button>
+      <button class="nav-item" data-view="architecture">Pipeline architecture</button>
+      <button class="nav-item" data-view="documents">Legacy documents</button>
+    </nav>
+
+    <main class="page">
+      <section class="feature-view panel" id="benchmark-view">
+        <div class="feature-head"><div><h2>Benchmark evaluation</h2><p>Held-out summary-model ROUGE F1 scores.</p></div><button class="secondary" id="benchmark-refresh" type="button">Refresh evaluation</button></div>
+        <div id="benchmark-status" class="notice" role="status"><div aria-hidden="true">◌</div><div><strong>Loading evaluation…</strong><span>Reading saved ROUGE results.</span></div></div>
+        <div id="benchmark-results" class="metric-grid"></div>
+        <p class="privacy-note" id="benchmark-notice">Synthetic held-out ROUGE scores measure text overlap only; they are not clinical accuracy or clinical validation.</p>
+      </section>
+      <section class="feature-view panel" id="architecture-view">
+        <div class="feature-head"><div><h2>Pipeline architecture</h2><p>Click a stage to understand its input, output, and evidence responsibility.</p></div><span class="mini-pill">9 deterministic stages</span></div>
+        <div class="arch-grid" id="architecture-grid"></div>
+      </section>
+      <section class="feature-view panel" id="documents-view">
+        <div class="feature-head"><div><h2>Legacy document analyzer</h2><p>Bring PDF, DOCX, or TXT notes into the same evidence-linked review flow.</p></div><span class="mini-pill">10 MB limit</span></div>
+        <div class="upload-zone"><strong>Drop a clinical document here</strong><br><span>PDF, DOCX, and TXT accepted. Text stays local in this preview.</span><br><button class="secondary" id="document-picker" style="margin-top:14px">Choose document</button><input id="document-input" type="file" accept=".pdf,.docx,.txt" hidden></div>
+      </section>
+      <section class="intro">
+        <div class="eyebrow">Physician workspace</div>
+        <h1>Start with the patient’s story.</h1>
+        <p>Capture a narration in plain language. ClinIQ structures the evidence so you can review it faster — without replacing clinical judgment.</p>
+      </section>
+
+      <section class="workspace" aria-label="Case intake">
+        <div class="panel panel-main">
+          <div class="panel-head">
+            <div><h2 class="panel-title">Patient narration</h2><p class="panel-subtitle">Describe what the patient reports, in their own words.</p></div>
+            <div class="lang-control" role="group" aria-label="Input language">
+              <button class="active" data-lang="English">English</button><button data-lang="Hindi">हिन्दी</button><button data-lang="Kannada">ಕನ್ನಡ</button>
+            </div>
+          </div>
+          <section class="patient-details" aria-labelledby="patient-details-title">
+            <h3 id="patient-details-title">Patient details</h3>
+            <div class="patient-grid">
+              <div class="patient-field"><label for="patient-name">Full name <span class="required-mark">*</span></label><input id="patient-name" autocomplete="off" maxlength="100"></div>
+              <div class="patient-field"><label for="patient-age">Age (or date of birth) <span class="required-mark">*</span></label><input id="patient-age" type="number" min="0" max="120" inputmode="numeric"></div>
+              <div class="patient-field"><label for="patient-dob">Date of birth</label><input id="patient-dob" type="date"></div>
+              <div class="patient-field"><label for="patient-sex">Sex <span class="required-mark">*</span></label><select id="patient-sex"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option><option>Not stated</option></select></div>
+              <div class="patient-field"><label for="patient-id">Patient ID / MRN</label><input id="patient-id" maxlength="40" autocomplete="off"></div>
+              <div class="patient-field"><label for="patient-phone">Phone</label><input id="patient-phone" inputmode="numeric" autocomplete="off"></div>
+              <div class="patient-field"><label for="patient-address">Address / city</label><input id="patient-address" maxlength="300" autocomplete="off"></div>
+              <div class="patient-field"><label for="patient-weight">Weight (kg)</label><input id="patient-weight" type="number" min="0.1" max="1000" step="0.1"></div>
+              <div class="patient-field"><label for="patient-height">Height (cm)</label><input id="patient-height" type="number" min="1" max="300" step="0.1"></div>
+              <div class="patient-field"><label for="patient-blood">Blood group</label><input id="patient-blood" maxlength="8"></div>
+              <div class="patient-field"><label for="patient-allergies">Known allergies</label><input id="patient-allergies" maxlength="2000" autocomplete="off"></div>
+              <div class="patient-field"><label for="patient-meds">Current medications</label><input id="patient-meds" maxlength="4000" autocomplete="off"></div>
+              <div class="patient-field"><label for="emergency-name">Emergency contact name</label><input id="emergency-name" maxlength="100" autocomplete="off"></div>
+              <div class="patient-field"><label for="emergency-phone">Emergency contact phone</label><input id="emergency-phone" inputmode="numeric" autocomplete="off"></div>
+              <div class="patient-field"><label for="referring-physician">Referring physician</label><input id="referring-physician" maxlength="100" autocomplete="off"></div>
+              <div class="patient-field"><label for="visit-date">Visit date <span class="required-mark">*</span></label><input id="visit-date" type="date"></div>
+              <div class="patient-field"><label for="department">Department / clinic name</label><input id="department" maxlength="150" autocomplete="off"></div>
+              <div class="patient-field"><label for="examining-physician">Examining physician</label><input id="examining-physician" maxlength="100" autocomplete="off"></div>
+            </div>
+            <p id="patient-errors" class="field-errors" aria-live="polite"></p>
+            <label class="consent-row"><input id="patient-consent" type="checkbox"><span>I confirm the patient has agreed to this information being processed. <span class="required-mark">*</span></span></label>
+          </section>
+          <textarea id="narration" maxlength="5000" aria-label="Patient narration" placeholder="For example: I have had a fever for 5 days and feel tired. I do not have diabetes. My father has hypertension."></textarea>
+          <div class="voice-card visible" id="voice-card">
+            <div class="voice-head"><span class="voice-label" id="voice-label">English voice capture</span><button class="secondary" id="voice-toggle" type="button">Start microphone</button></div>
+            <div class="voice-status" id="voice-status" aria-live="polite">Records locally and transcribes into the selected language’s native script.</div>
+            <div class="voice-meter" aria-label="Recording level"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+          <div class="translation-card" id="translation-card">
+            <div class="translation-grid"><div class="translation-pane"><label id="original-label">Original</label><p id="original-text">Enter Hindi or Kannada narration to preserve the original wording here.</p></div><div class="translation-pane"><label>English translation · editable</label><textarea id="translation-text" placeholder="English translation appears here"></textarea><button class="secondary" id="translate-now" type="button" style="margin-top:10px">Translate to English</button><p class="voice-status" id="translation-status" aria-live="polite"></p></div><div class="translation-pane"><label>Back translation</label><p id="back-translation">Not available yet.</p><div id="translation-risk" class="voice-status"></div></div></div>
+            <div class="translation-notice">Translation uses an external service unless CLINIQ_TRANSLATION_OFFLINE=1. Review the English text. Token checks are heuristic comparisons, not calibrated confidence scores.</div>
+            <label class="translation-pane">Physician reviewer name <input id="translation-reviewer" maxlength="120" placeholder="Required to confirm translation"></label>
+            <label class="translation-confirm"><input id="translation-confirm" type="checkbox"><span>I have reviewed the translation and confirm it is suitable for physician review.</span></label>
+          </div>
+          <div class="field-foot"><span>Plain language is fine. Include timing, medicines, allergies, and relevant negatives.</span><span id="count">0 / 5,000</span></div>
+          <div class="sample-label" id="sample-label">Try a sample case</div>
+          <div class="chips" id="sample-chips">
+            <button class="chip" data-sample="I do not have diabetes, but I have fever for 5 days.">Diabetes negated + fever for 5 days</button>
+            <button class="chip" data-sample="I have had a cough for two weeks and take paracetamol 500 mg twice a day.">Cough + medication history</button>
+            <button class="chip" data-sample="My father had hypertension. I am not allergic to penicillin.">Family history + allergy check</button>
+          </div>
+          <button class="primary" id="analyze" disabled><span aria-hidden="true">✦</span> Analyze narration</button>
+          <button class="secondary" id="clear-patient-data" type="button">Clear all patient data</button>
+          <div class="progress-wrap" id="progress" aria-live="polite">
+            <div class="progress-label"><span id="progressText">Preparing pipeline…</span><span id="progressCount">0 / 9</span></div>
+            <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
+          </div>
+        </div>
+
+        <aside class="panel panel-side">
+          <h2 class="side-title">What happens next</h2>
+          <div class="pipeline" id="pipeline"></div>
+          <hr class="side-rule">
+          <p class="privacy-note"><strong>Privacy:</strong> Patient details stay in browser memory until analysis or export. This prototype is not compliant with medical-privacy regulations by itself.</p>
+        </aside>
+      </section>
+
+      <section class="panel results" id="results" aria-live="polite">
+        <div class="results-top">
+          <div><div class="result-kicker">Reviewable output</div><h2>Clinical Information Summary</h2><p>Structured patient report for physician review.</p></div>
+          <span class="mini-pill">Waiting for pipeline</span><button class="secondary" id="print-report-button" type="button">Print / Save as PDF</button><button class="secondary" id="download-docx" type="button">Download DOCX</button>
+        </div>
+        <div class="result-tabs" role="tablist">
+          <button class="result-tab active" data-tab="report">Report</button><button class="result-tab" data-tab="summary-evidence">Summary evidence</button><button class="result-tab" data-tab="entities">Entities</button><button class="result-tab" data-tab="assertions">Assertions</button><button class="result-tab" data-tab="timeline">Timeline</button><button class="result-tab" data-tab="flags">Flags</button><button class="result-tab" data-tab="review">Review</button><button class="result-tab" data-tab="developer">Developer view</button>
+        </div>
+        <div id="demo-banner" class="translation-notice" hidden>DEMO PREVIEW — not generated by the clinical pipeline</div>
+        <div class="result-pane active" data-pane="report"><div id="report-view"><header class="report-section"><h1>Clinical Information Summary</h1><p>Report ID: Not provided · Generated: Not provided · Visit date: Not provided</p></header><section class="report-section"><h3>Patient information</h3><p>Enter patient details and analyze a narration to generate a report.</p></section><section class="report-section"><h3>Chief complaints</h3></section><section class="report-section"><h3>History of present illness</h3></section><section class="report-section"><h3>Past medical history</h3></section><section class="report-section"><h3>Family history</h3></section><section class="report-section"><h3>Current medications</h3></section><section class="report-section"><h3>Allergies</h3></section><section class="report-section"><h3>Vitals and test results</h3></section><section class="report-section"><h3>Timeline</h3></section><section class="report-section"><h3>Safety and completeness flags</h3></section><section class="report-section"><h3>Pipeline provenance</h3></section><section class="report-section"><h3>Physician review status</h3></section><section class="report-section"><h3>Physician sign-off</h3></section><section class="report-section"><h3>Required disclaimer</h3><p>Decision-support summary only. Not a diagnosis or treatment recommendation. Must be reviewed by a licensed physician.</p></section></div></div>
+        <div class="result-pane" data-pane="summary-evidence"><div class="result-body" style="padding:0">
+          <div>
+            <div class="summary" id="summary"></div>
+            <div class="fact-list" id="facts"></div>
+          </div>
+          <div class="evidence"><h3>Original narration</h3><pre id="source-original"></pre><h3>English pipeline source</h3><pre id="source-english"></pre><p id="evidence">Summary facts link to the English source text.</p></div>
+        </div></div>
+        <div class="result-pane" data-pane="entities"><p class="panel-subtitle">Named entities are linked to their original character offsets and extraction confidence.</p><div class="fact-list" id="entity-list"></div></div>
+        <div class="result-pane" data-pane="assertions"><p class="panel-subtitle">Semantic assertion is always paired with a label, not color alone.</p><div class="fact-list" id="assertion-list"></div></div>
+        <div class="result-pane" data-pane="timeline"><div class="fact-list" id="timeline-list"></div></div>
+        <div class="result-pane" data-pane="flags"><div class="fact-list" id="flags-list"></div></div>
+        <div class="result-pane" data-pane="review"><p class="panel-subtitle">Review actions are stored in a local append-only audit chain. Real authentication is future work.</p><label>Reviewer name <input id="reviewer-name" maxlength="120" placeholder="Enter your name"></label><button class="secondary" id="verify-audit" type="button">Verify audit chain</button><p id="audit-status" aria-live="polite"></p><div id="review-list"></div></div>
+        <div class="result-pane" data-pane="developer"><details><summary>Developer view — for debugging only</summary><div class="json-box" id="json-box"></div></details></div>
+        <div id="print-report" hidden></div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script>
+    const stages = [
+      "Preprocess narration", "Extract clinical entities", "Resolve negation",
+      "Resolve timing", "Link related facts", "Classify sections",
+      "Assemble PatientRecord", "Generate summary", "Prepare physician review"
+    ];
+    // ── Multilingual sample cases (native script only – no transliteration) ──
+    const SAMPLES = {
+      "English": [
+        { text: "I do not have diabetes, but I have fever for 5 days.",       label: "Diabetes negated + fever for 5 days" },
+        { text: "I have had a cough for two weeks and take paracetamol 500 mg twice a day.", label: "Cough + medication history" },
+        { text: "My father had hypertension. I am not allergic to penicillin.", label: "Family history + allergy check" }
+      ],
+      "Hindi": [
+        { text: "मुझे पाँच दिनों से बुखार है। मुझे मधुमेह नहीं है।",           label: "बुखार + मधुमेह निषेध" },
+        { text: "मुझे दो हफ्तों से खाँसी है और मैं पैरासिटामोल 500 मिलीग्राम दिन में दो बार लेता हूँ।", label: "खाँसी + दवा का इतिहास" },
+        { text: "मेरे पिताजी को उच्च रक्तचाप था। मुझे पेनिसिलिन से कोई एलर्जी नहीं है।", label: "पारिवारिक इतिहास + एलर्जी जाँच" }
+      ],
+      "Kannada": [
+        { text: "ನನಗೆ ಐದು ದಿನಗಳಿಂದ ಜ್ವರ ಇದೆ. ನನಗೆ ಮಧುಮೇಹ ಇಲ್ಲ.",           label: "ಜ್ವರ + ಮಧುಮೇಹ ನಿರಾಕರಣೆ" },
+        { text: "ನನಗೆ ಎರಡು ವಾರಗಳಿಂದ ಕೆಮ್ಮು ಇದೆ ಮತ್ತು ನಾನು ಪ್ಯಾರಾಸಿಟಮಾಲ್ 500 ಮಿಗ್ರಾ ದಿನಕ್ಕೆ ಎರಡು ಬಾರಿ ತೆಗೆದುಕೊಳ್ಳುತ್ತೇನೆ.", label: "ಕೆಮ್ಮು + ಔಷಧ ಇತಿಹಾಸ" },
+        { text: "ನನ್ನ ತಂದೆಗೆ ಅಧಿಕ ರಕ್ತದೊತ್ತಡ ಇತ್ತು. ನನಗೆ ಪೆನ್ಸಿಲಿನ್ ನಿಂದ ಯಾವುದೇ ಅಲರ್ಜಿ ಇಲ್ಲ.", label: "ಕುಟುಂಬ ಇತಿಹಾಸ + ಅಲರ್ಜಿ ಪರೀಕ್ಷೆ" }
+      ]
+    };
+
+    const NARRATION_PLACEHOLDERS = {
+      "English": "For example: I have had a fever for 5 days and feel tired. I do not have diabetes. My father has hypertension.",
+      "Hindi":   "उदाहरण: मुझे पाँच दिनों से बुखार है और थकान महसूस होती है। मुझे मधुमेह नहीं है। मेरे पिताजी को उच्च रक्तचाप है।",
+      "Kannada": "ಉದಾಹರಣೆ: ನನಗೆ ಐದು ದಿನಗಳಿಂದ ಜ್ವರ ಮತ್ತು ಆಯಾಸ ಇದೆ. ನನಗೆ ಮಧುಮೇಹ ಇಲ್ಲ. ನನ್ನ ತಂದೆಗೆ ಅಧಿಕ ರಕ್ತದೊತ್ತಡ ಇದೆ."
+    };
+
+    const SAMPLE_LABELS = {
+      "English": "Try a sample case",
+      "Hindi":   "नमूना मामला आज़माएँ",
+      "Kannada": "ಮಾದರಿ ಪ್ರಕರಣ ಪ್ರಯತ್ನಿಸಿ"
+    };
+
+    function renderSampleChips(lang) {
+      const chips = document.getElementById("sample-chips");
+      const label = document.getElementById("sample-label");
+      const narrationEl = document.getElementById("narration");
+      if (label) label.textContent = SAMPLE_LABELS[lang] || SAMPLE_LABELS["English"];
+      if (narrationEl) narrationEl.placeholder = NARRATION_PLACEHOLDERS[lang] || NARRATION_PLACEHOLDERS["English"];
+      if (!chips) return;
+      chips.replaceChildren();
+      (SAMPLES[lang] || SAMPLES["English"]).forEach(({ text, label: chipLabel }) => {
+        const btn = document.createElement("button");
+        btn.className = "chip";
+        btn.dataset.sample = text;
+        btn.textContent = chipLabel;
+        btn.addEventListener("click", () => {
+          const _narBox = document.getElementById("narration");
+          if (_narBox) {
+            _narBox.value = text;
+            _narBox.dispatchEvent(new Event("input", { bubbles: true }));
+            _narBox.focus();
+          }
+        });
+        chips.appendChild(btn);
+      });
+    }
+    const pipeline = document.getElementById("pipeline");
+    const narration = document.getElementById("narration");
+    const count = document.getElementById("count");
+    const analyze = document.getElementById("analyze");
+    const progress = document.getElementById("progress");
+    const progressBar = document.getElementById("progressBar");
+    const progressText = document.getElementById("progressText");
+    const progressCount = document.getElementById("progressCount");
+    const results = document.getElementById("results");
+    const toast = document.getElementById("toast");
+    const voiceCard = document.getElementById("voice-card");
+    const translationCard = document.getElementById("translation-card");
+    const translationConfirm = document.getElementById("translation-confirm");
+    const translationText = document.getElementById("translation-text");
+    const translationStatus = document.getElementById("translation-status");
+    let translationToken = null;
+    let translationRiskLevel = "Not provided";
+    let demographicsValid = false;
+    const selectedLanguage = () => document.querySelector("[data-lang].active")?.dataset.lang || "English";
+    const demographicFields = ["patient-name", "patient-age", "patient-dob", "patient-sex", "patient-id", "patient-phone", "patient-address", "patient-weight", "patient-height", "patient-blood", "patient-allergies", "patient-meds", "emergency-name", "emergency-phone", "referring-physician", "visit-date", "department", "examining-physician", "patient-consent"];
+
+    stages.forEach((stage, i) => {
+      const row = document.createElement("div");
+      row.className = "stage";
+      row.innerHTML = `<span class="stage-index">${i + 1}</span><span>${stage}</span>`;
+      pipeline.appendChild(row);
+    });
+
+    function localDateString(date = new Date()) { return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`; }
+    document.getElementById("visit-date").value = localDateString();
+    localStorage.removeItem("cliniq-draft");
+    const reviewerInput = document.getElementById("reviewer-name");
+    reviewerInput.value = sessionStorage.getItem("cliniq-reviewer") || "";
+    reviewerInput.addEventListener("input", () => { sessionStorage.setItem("cliniq-reviewer", reviewerInput.value); translationReviewer.value = reviewerInput.value; });
+    const translationReviewer = document.getElementById("translation-reviewer");
+    translationReviewer.value = reviewerInput.value;
+    translationReviewer.addEventListener("input", () => { reviewerInput.value = translationReviewer.value; sessionStorage.setItem("cliniq-reviewer", translationReviewer.value); });
+    function calculateAge(dob, asOf = new Date()) {
+      const born = new Date(`${dob}T00:00:00`);
+      if (Number.isNaN(born.getTime())) return null;
+      let age = asOf.getFullYear() - born.getFullYear();
+      if (asOf.getMonth() < born.getMonth() || (asOf.getMonth() === born.getMonth() && asOf.getDate() < born.getDate())) age--;
+      return age;
+    }
+    function validateDemographics() {
+      const v = id => document.getElementById(id).value.trim();
+      const errors = [];
+      const name = v("patient-name"), ageText = v("patient-age"), dob = v("patient-dob"), visit = v("visit-date");
+      if (name.length < 2 || name.length > 100) errors.push("Full name must be 2–100 characters.");
+      if (!ageText && !dob) errors.push("Enter age or date of birth.");
+      const age = dob ? calculateAge(dob, visit ? new Date(`${visit}T00:00:00`) : new Date()) : Number(ageText);
+      if ((ageText || dob) && (!Number.isInteger(age) || age < 0 || age > 120)) errors.push("Age must be between 0 and 120.");
+      if (dob && dob > localDateString()) errors.push("Date of birth cannot be in the future.");
+      if (!v("patient-sex")) errors.push("Select a sex value.");
+      for (const id of ["patient-phone", "emergency-phone"]) if (v(id) && !/^\d{7,15}$/.test(v(id))) errors.push(`${id === "patient-phone" ? "Phone" : "Emergency contact phone"} must contain 7–15 digits.`);
+      if (!visit || visit > localDateString()) errors.push("Visit date is required and cannot be in the future.");
+      const w = v("patient-weight"), h = v("patient-height");
+      if (w && (!(Number(w) > 0) || Number(w) > 1000)) errors.push("Weight must be a positive value up to 1000 kg.");
+      if (h && (!(Number(h) > 0) || Number(h) > 300)) errors.push("Height must be a positive value up to 300 cm.");
+      if (!document.getElementById("patient-consent").checked) errors.push("Patient consent is required.");
+      document.getElementById("patient-errors").textContent = errors.join(" ");
+      demographicsValid = errors.length === 0;
+      updateAnalyzeButton();
+      return demographicsValid;
+    }
+    function updateAnalyzeButton() {
+      analyze.disabled = narration.value.trim().length < 12 || !demographicsValid || (selectedLanguage() !== "English" && !translationToken);
+    }
+    function collectDemographics() {
+      const v = id => document.getElementById(id).value.trim();
+      const dob = v("patient-dob"), visit = v("visit-date");
+      const age = dob ? calculateAge(dob, visit ? new Date(`${visit}T00:00:00`) : new Date()) : (v("patient-age") ? Number(v("patient-age")) : null);
+      let patientId = v("patient-id");
+      if (!patientId) {
+        const bytes = new Uint8Array(3); crypto.getRandomValues(bytes);
+        patientId = `CLQ-${Array.from(bytes, n => n.toString(16).padStart(2, "0")).join("").toUpperCase()}`;
+        document.getElementById("patient-id").value = patientId;
+      }
+      return { full_name: v("patient-name"), age, date_of_birth: dob || null, sex: v("patient-sex"), patient_id: patientId,
+        phone: v("patient-phone") || null, address_city: v("patient-address") || null,
+        weight_kg: v("patient-weight") ? Number(v("patient-weight")) : null, height_cm: v("patient-height") ? Number(v("patient-height")) : null,
+        blood_group: v("patient-blood") || null, known_allergies: v("patient-allergies") || null,
+        current_medications: v("patient-meds") || null, emergency_contact_name: v("emergency-name") || null,
+        emergency_contact_phone: v("emergency-phone") || null, referring_physician: v("referring-physician") || null,
+        visit_date: visit, department: v("department") || null, examining_physician: v("examining-physician") || null,
+        consent: document.getElementById("patient-consent").checked };
+    }
+    function syncAgeFromDob() {
+      const dob = document.getElementById("patient-dob").value;
+      const ageField = document.getElementById("patient-age");
+      if (dob) { const visit = document.getElementById("visit-date").value; const age = calculateAge(dob, visit ? new Date(`${visit}T00:00:00`) : new Date()); ageField.value = age; ageField.readOnly = true; }
+      else { ageField.readOnly = false; }
+      validateDemographics();
+    }
+    document.getElementById("patient-dob").addEventListener("input", syncAgeFromDob);
+    document.getElementById("visit-date").addEventListener("input", syncAgeFromDob);
+    for (const id of demographicFields) document.getElementById(id).addEventListener("input", validateDemographics);
+    document.getElementById("patient-sex").addEventListener("change", validateDemographics);
+    function updateDraft() {
+      count.textContent = `${narration.value.length.toLocaleString()} / 5,000`;
+      updateAnalyzeButton();
+    }
+    narration.addEventListener("input", updateDraft);
+    updateDraft();
+
+    // Initial chip render for English (default language)
+    renderSampleChips("English");
+    document.querySelectorAll("[data-lang]").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-lang]").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        renderSampleChips(button.dataset.lang);
+        const nonEnglish = button.dataset.lang !== "English";
+        voiceCard.classList.add("visible");
+        document.getElementById("voice-label").textContent = `${button.dataset.lang} voice capture`;
+        voiceStatus.textContent = `Speak in ${button.dataset.lang}. The transcription will use ${button.dataset.lang === "Hindi" ? "Devanagari" : button.dataset.lang === "Kannada" ? "Kannada" : "English"} script.`;
+        translationCard.classList.toggle("visible", nonEnglish);
+        translationConfirm.checked = false;
+        translationToken = null;
+        updateAnalyzeButton();
+        document.getElementById("original-label").textContent = `Original · ${button.dataset.lang}`;
+        if (nonEnglish) {
+          document.getElementById("original-text").textContent = narration.value || `Enter ${button.dataset.lang} narration to preserve the original wording here.`;
+          translationText.value = "";
+          showToast("Translation review is required before Analyze is enabled.");
+        }
+      });
+    });
+    translationConfirm.addEventListener("change", () => {
+      if (!translationConfirm.checked) { translationToken = null; updateAnalyzeButton(); return; }
+      confirmTranslation();
+    });
+    async function confirmTranslation() {
+      analyze.disabled = true;
+      try {
+        const response = await fetch("http://127.0.0.1:8765/api/translate/confirm", { method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ original: narration.value.trim(), language: selectedLanguage(), english_text: translationText.value.trim(), reviewer: translationReviewer.value.trim() }) });
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.error || "Confirmation failed");
+        translationToken = payload.translation_token;
+        updateAnalyzeButton();
+        translationStatus.textContent = "Edited translation confirmed for this exact source and text.";
+      } catch (error) {
+        translationConfirm.checked = false; translationToken = null;
+        translationStatus.textContent = `Could not confirm translation: ${error.message}`;
+      }
+    }
+    translationText.addEventListener("input", () => {
+      translationToken = null; translationConfirm.checked = false; updateAnalyzeButton();
+      translationStatus.textContent = "Edited text changed; review and confirm again.";
+    });
+    narration.addEventListener("input", () => {
+      if (selectedLanguage() !== "English") {
+        translationToken = null; translationConfirm.checked = false;
+        document.getElementById("original-text").textContent = narration.value || "Original narration will appear here.";
+        updateAnalyzeButton();
+      }
+    });
+
+    async function translateNarration() {
+      const text = narration.value.trim();
+      if (selectedLanguage() === "English" || text.length < 3) return;
+      translationStatus.textContent = "Translating…";
+      translationStatus.style.color = "var(--teal)";
+      try {
+        const response = await fetch("http://127.0.0.1:8765/api/translate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text, language: selectedLanguage() })
+        });
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.error || "Translation failed");
+        translationText.value = payload.translated_text || "";
+        translationToken = payload.translation_token || null;
+        document.getElementById("back-translation").textContent = payload.back_translation || "Back translation unavailable.";
+        const report = payload.critical_token_report || {};
+        const level = report.risk_level || "unknown";
+        translationRiskLevel = level;
+        document.getElementById("translation-risk").innerHTML = `<strong>Heuristic risk: ${escapeHtml(level.toUpperCase())}</strong> · not calibrated` + (report.items || []).filter(item => item.status !== "preserved").map(item => ` <span class="risk-badge ${item.status === "missing" ? "high" : "medium"}">${escapeHtml(item.source_token)} · ${escapeHtml(item.status)}</span>`).join("");
+        translationStatus.textContent = `Translated ${payload.source_language} → English. Please review it.`;
+        translationStatus.style.color = "var(--green)";
+      } catch (error) {
+        const message = error.message === "Failed to fetch"
+          ? "Cannot reach the local API. Start run_web_api.bat in one terminal and run_frontend.bat in another, then retry."
+          : `Translation unavailable: ${error.message}`;
+        translationStatus.textContent = message;
+        translationStatus.style.color = "var(--red)";
+      }
+    }
+    document.getElementById("translate-now").addEventListener("click", translateNarration);
+    let translationTimer;
+    narration.addEventListener("input", () => {
+      if (selectedLanguage() !== "English") {
+        window.clearTimeout(translationTimer);
+        translationTimer = window.setTimeout(translateNarration, 900);
+      }
+    });
+
+    const voiceButton = document.getElementById("voice-toggle");
+    const voiceStatus = document.getElementById("voice-status");
+    let voiceActive = false;
+    let recognitionInstance = null;
+    let audioStream = null, audioContext = null, audioProcessor = null, audioSource = null;
+    let audioSamples = [], recordedSampleRate = 16000;
+
+    function setVoiceIdle(message) {
+      voiceActive = false;
+      voiceCard.classList.remove("recording");
+      voiceButton.disabled = false;
+      voiceButton.textContent = "Start microphone";
+      if (message) voiceStatus.textContent = message;
+    }
+
+    function insertTranscript(text, lang) {
+      if (!text || !text.trim()) return;
+      const separator = narration.value && !/\s$/.test(narration.value) ? " " : "";
+      narration.value += separator + text.trim();
+      narration.dispatchEvent(new Event("input", { bubbles: true }));
+      const scriptName = lang === "Hindi" ? "Devanagari" : lang === "Kannada" ? "Kannada" : "English";
+      setVoiceIdle(`Captured ${lang} speech in ${scriptName} script. Review narration, then continue.`);
+    }
+
+    function makeWavBlob(samples, sampleRate) {
+      const buffer = new ArrayBuffer(44 + samples.length * 2);
+      const view = new DataView(buffer);
+      const writeText = (at, value) => [...value].forEach((char, index) => view.setUint8(at + index, char.charCodeAt(0)));
+      writeText(0, "RIFF"); view.setUint32(4, 36 + samples.length * 2, true); writeText(8, "WAVE");
+      writeText(12, "fmt "); view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, 1, true);
+      view.setUint32(24, sampleRate, true); view.setUint32(28, sampleRate * 2, true); view.setUint16(32, 2, true); view.setUint16(34, 16, true);
+      writeText(36, "data"); view.setUint32(40, samples.length * 2, true);
+      samples.forEach((value, index) => view.setInt16(44 + index * 2, Math.max(-1, Math.min(1, value)) * 0x7fff, true));
+      return new Blob([buffer], { type: "audio/wav" });
+    }
+
+    async function releaseMicrophone() {
+      audioProcessor?.disconnect(); audioSource?.disconnect();
+      audioStream?.getTracks().forEach(track => track.stop());
+      if (audioContext && audioContext.state !== "closed") await audioContext.close();
+      audioStream = audioContext = audioProcessor = audioSource = null;
+    }
+
+    async function transcribeRecording() {
+      const samples = Float32Array.from(audioSamples.flat());
+      if (!samples.length) { setVoiceIdle("No audio was recorded. Please speak and try again."); return; }
+      voiceStatus.textContent = "Transcribing audio…";
+      voiceButton.disabled = true;
+      const form = new FormData();
+      form.append("language", selectedLanguage());
+      form.append("file", makeWavBlob(samples, recordedSampleRate), "microphone.wav");
+      try {
+        const response = await fetch("http://127.0.0.1:8765/api/transcribe", { method: "POST", body: form });
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.error || "Transcription failed");
+        insertTranscript(payload.text, payload.language || lang);
+      } catch (error) {
+        const message = error.message === "Failed to fetch"
+          ? "Cannot reach the local API. Ensure python web_api.py is running on port 8765."
+          : `Could not transcribe: ${error.message}`;
+        setVoiceIdle(message);
+      }
+    }
+
+    async function startWavRecording() {
+      if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia || (!window.AudioContext && !window.webkitAudioContext)) {
+        setVoiceIdle("Microphone recording requires Chrome or Edge on http://127.0.0.1:5500/ or HTTPS.");
+        return;
+      }
+      try {
+        voiceStatus.textContent = "Requesting microphone access… approve the browser prompt if it appears.";
+        audioStream = await navigator.mediaDevices.getUserMedia({
+          audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true }
+        });
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        audioContext = new AudioCtx();
+        if (audioContext.state === "suspended") {
+          await audioContext.resume();
+        }
+        recordedSampleRate = audioContext.sampleRate;
+        audioSamples = [];
+        audioSource = audioContext.createMediaStreamSource(audioStream);
+        audioProcessor = audioContext.createScriptProcessor(4096, 1, 1);
+        audioProcessor.onaudioprocess = event => {
+          if (voiceActive) {
+            audioSamples.push(Array.from(event.inputBuffer.getChannelData(0)));
+          }
+        };
+        audioSource.connect(audioProcessor);
+        audioProcessor.connect(audioContext.destination);
+        voiceActive = true;
+        voiceCard.classList.add("recording");
+        voiceButton.textContent = "Stop and transcribe";
+        voiceStatus.textContent = `Recording ${selectedLanguage()} speech… speak clearly, then select Stop and transcribe.`;
+      } catch (error) {
+        const denied = error.name === "NotAllowedError" || error.name === "PermissionDeniedError";
+        setVoiceIdle(denied ? "Microphone permission was denied. Allow it in site settings, then try again." : `Could not start microphone: ${error.message}`);
+      }
+    }
+
+    async function startMicrophone() {
+      const lang = selectedLanguage();
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      // 1. Try Browser Native SpeechRecognition first (Chrome/Edge real-time STT)
+      if (SpeechRecognition) {
+        try {
+          const rec = new SpeechRecognition();
+          rec.continuous = false;
+          rec.interimResults = false;
+          rec.maxAlternatives = 1;
+          rec.lang = lang === "Hindi" ? "hi-IN" : lang === "Kannada" ? "kn-IN" : "en-IN";
+
+          rec.onstart = () => {
+            voiceActive = true;
+            voiceCard.classList.add("recording");
+            voiceButton.disabled = false;
+            voiceButton.textContent = "Stop microphone";
+            voiceStatus.textContent = `Listening in ${lang} (${rec.lang})… speak clearly into your microphone.`;
+          };
+
+          rec.onresult = (event) => {
+            const transcript = event.results[0]?.[0]?.transcript || "";
+            if (transcript) {
+              insertTranscript(transcript, lang);
+            }
+          };
+
+          rec.onerror = (event) => {
+            console.warn("SpeechRecognition error:", event.error);
+            if (event.error === "not-allowed" || event.error === "service-not-allowed") {
+              setVoiceIdle("Microphone access was denied. Allow it in site settings and retry.");
+            } else if (event.error === "no-speech") {
+              setVoiceIdle("No speech was detected. Please click Start microphone and speak clearly.");
+            } else {
+              // Network or browser STT service issue: fall back to local WAV recording + API
+              voiceStatus.textContent = "Switching to audio recording mode…";
+              startWavRecording();
+            }
+          };
+
+          rec.onend = () => {
+            if (voiceActive && !audioStream) {
+              setVoiceIdle("Microphone stopped.");
+            }
+          };
+
+          recognitionInstance = rec;
+          rec.start();
+          return;
+        } catch (e) {
+          console.warn("Could not start SpeechRecognition, falling back to WAV recording:", e);
+        }
+      }
+
+      // 2. Fallback: Record WAV audio and send to /api/transcribe
+      await startWavRecording();
+    }
+
+    voiceButton.addEventListener("click", async () => {
+      if (voiceActive) {
+        if (recognitionInstance) {
+          try { recognitionInstance.stop(); } catch (_) {}
+          recognitionInstance = null;
+        }
+        if (audioStream) {
+          voiceActive = false;
+          voiceCard.classList.remove("recording");
+          await releaseMicrophone();
+          await transcribeRecording();
+        } else {
+          setVoiceIdle("Processing speech…");
+        }
+      } else {
+        await startMicrophone();
+      }
+    });
+
+    const variants = {
+      "01": "variants/01-clinical-instrument.css", "02": "variants/02-evidence-editorial.css",
+      "03": "variants/03-operator-console.css", "04": "variants/04-guided-intake.css",
+      "05": "variants/05-quiet-review.css"
+    };
+    document.getElementById("variant").addEventListener("change", event => {
+      document.getElementById("variant-css").href = variants[event.target.value];
+      localStorage.setItem("cliniq-variant", event.target.value);
+    });
+    const storedVariant = localStorage.getItem("cliniq-variant");
+    if (storedVariant && variants[storedVariant]) {
+      document.getElementById("variant").value = storedVariant;
+      document.getElementById("variant-css").href = variants[storedVariant];
+    }
+
+    const architectureGrid = document.getElementById("architecture-grid");
+    stages.forEach((stage, index) => {
+      const card = document.createElement("button");
+      card.className = "arch-step";
+      card.innerHTML = `<b>${index + 1}. ${stage}</b><span>Structured input → auditable output</span>`;
+      card.addEventListener("click", () => showToast(`${stage}: preserves evidence and provenance for physician review.`));
+      architectureGrid.appendChild(card);
+    });
+    function benchmarkCard(title, value, detail = "") {
+      const card = document.createElement("div"); card.className = "metric";
+      const strong = document.createElement("strong"); strong.textContent = value;
+      const label = document.createElement("span"); label.textContent = title;
+      card.append(strong, label);
+      if (detail) { const note = document.createElement("small"); note.textContent = detail; card.appendChild(note); }
+      return card;
+    }
+    function renderBenchmark(data) {
+      const status = document.getElementById("benchmark-status");
+      const root = document.getElementById("benchmark-results"); root.replaceChildren();
+      const evaluation = data.summary_model?.summary_evaluation;
+      if (!evaluation) {
+        status.hidden = false;
+        status.textContent = "No summary evaluation has been saved yet. Run the checkpoint evaluation command, then refresh this page.";
+        return;
+      }
+      status.hidden = true;
+      const scores = evaluation.overall || {};
+      const cards = [
+        ["ROUGE-1 F1", scores.rouge1_f1],
+        ["ROUGE-2 F1", scores.rouge2_f1],
+        ["ROUGE-L F1", scores.rougeL_f1],
+      ];
+      if (!cards.every(([, value]) => typeof value === "number" && Number.isFinite(value))) {
+        status.hidden = false;
+        status.textContent = "Saved evaluation does not include all three ROUGE F1 scores.";
+        return;
+      }
+      for (const [label, value] of cards) root.appendChild(benchmarkCard(label, `${value.toFixed(2)}%`));
+      document.getElementById("benchmark-notice").textContent = evaluation.notice || "Synthetic held-out ROUGE scores measure text overlap only; they are not clinical accuracy or clinical validation.";
+    }
+    async function loadBenchmark() {
+      const status = document.getElementById("benchmark-status");
+      status.hidden = false;
+      status.textContent = "Loading live benchmark and checkpoint status…";
+      const button = document.getElementById("benchmark-refresh"); button.disabled = true;
+      try {
+        const response = await fetch("http://127.0.0.1:8765/api/benchmark");
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Benchmark endpoint failed");
+        renderBenchmark(data);
+      } catch (error) { status.textContent = `Could not load benchmark status: ${error.message}. Start run_web_api.bat and refresh.`; }
+      finally { button.disabled = false; }
+    }
+    document.getElementById("benchmark-refresh").addEventListener("click", loadBenchmark);
+    document.querySelectorAll(".nav-item").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+        const view = button.dataset.view;
+        document.querySelectorAll(".feature-view").forEach(item => item.classList.remove("visible"));
+        document.querySelector(".intro").style.display = view === "intake" ? "" : "none";
+        document.querySelector(".workspace").style.display = view === "intake" ? "" : "none";
+        if (view !== "intake") document.getElementById(`${view}-view`).classList.add("visible");
+        if (view === "benchmark") loadBenchmark();
+      });
+    });
+    document.getElementById("document-picker").addEventListener("click", () => document.getElementById("document-input").click());
+    document.getElementById("document-input").addEventListener("change", event => {
+      const file = event.target.files[0];
+      if (!file) return;
+      if (file.size > 10 * 1024 * 1024) return showToast("That file is larger than the 10 MB limit.");
+      const data = new FormData(); data.append("file", file);
+      fetch("http://127.0.0.1:8765/api/document", { method: "POST", body: data }).then(async response => {
+        const payload = await response.json();
+        if (!response.ok) throw new Error(payload.error || "Document processing failed");
+        document.getElementById("summary").textContent = payload.summary;
+        document.getElementById("json-box").textContent = JSON.stringify({ patient_record: payload.patient_record, disclaimer: payload.disclaimer }, null, 2);
+        document.getElementById("flags-list").innerHTML = (payload.flags || []).map(flag => `<div class="fact"><strong>${flag.id}</strong><span>${flag.message}</span></div>`).join("") || "No flags.";
+        buildPrintReport(payload, payload.pipeline?.raw_text || "", payload.pipeline?.raw_text || "");
+        document.querySelector(".results-top .mini-pill").textContent = `Pipeline output · ${payload.request_id} · ${payload.generated_at || ""}`;
+        document.getElementById("demo-banner").hidden = true;
+        results.classList.add("visible"); showToast("Document extracted and sent through the clinical pipeline.");
+      }).catch(error => showToast(`Document processing failed: ${error.message}`));
+    });
+
+    function highlightEvidence(start, end) {
+      const source = document.getElementById("source-english").textContent || "";
+      const pre = document.getElementById("source-english");
+      if (start < 0 || end > source.length || end <= start) return;
+      pre.innerHTML = `${escapeHtml(source.slice(0, start))}<mark>${escapeHtml(source.slice(start, end))}</mark>${escapeHtml(source.slice(end))}`;
+      pre.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    function escapeHtml(value) { return value.replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]); }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 3400);
+    }
+
+    const reviewStatusByItem = new Map();
+    function reviewStatusLabel(itemId) {
+      const labels = { accept: "Accepted", edit: "Edited", reject: "Rejected", verify: "Verified" };
+      return labels[reviewStatusByItem.get(itemId)] || "Unreviewed";
+    }
+    function visibleReviewItems(sectionItems = []) {
+      const seen = new Set();
+      return sectionItems.filter(item => {
+        const key = `${item.section || ""}\u0000${String(item.display_text || "").trim().replace(/\s+/g, " ").toLocaleLowerCase()}`;
+        if (!key || seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    }
+    let privacyMaskTimer = null, patientHeaderRevealed = true;
+    function renderFormalReport(payload, demographics = payload.demographics || collectDemographics()) {
+      const root = document.getElementById("report-view"); root.replaceChildren();
+      const patient = payload.patient_record || {};
+      const sections = patient.sections || {};
+      const entities = patient.entities || [];
+      const reportId = payload.report_id || `CLQ-RPT-${String(payload.request_id || patient.id || "PREVIEW").slice(-8).toUpperCase()}`;
+      payload.report_id = reportId; payload.demographics = demographics;
+      const generated = payload.generated_at || new Date().toLocaleString();
+      const missing = value => value === null || value === undefined || String(value).trim() === "" ? "Not provided" : String(value);
+      const section = (title) => { const el = document.createElement("section"); el.className = "report-section"; const h = document.createElement("h3"); h.textContent = title; el.appendChild(h); root.appendChild(el); return el; };
+      const paragraph = (parent, text) => { const p = document.createElement("p"); p.textContent = missing(text); parent.appendChild(p); return p; };
+      const table = (parent, headers, rows) => {
+        const t = document.createElement("table"); t.className = "report-table";
+        const head = t.createTHead().insertRow(); headers.forEach(label => { const th = document.createElement("th"); th.textContent = label; head.appendChild(th); });
+        const body = t.createTBody();
+        (rows.length ? rows : [["Not provided"]]).forEach(values => { const tr = body.insertRow(); headers.forEach((_, i) => { const td = tr.insertCell(); td.textContent = missing(values[i]); }); });
+        parent.appendChild(t); return t;
+      };
+      const header = document.createElement("header"); header.className = "report-section";
+      const title = document.createElement("h1"); title.textContent = "Clinical Information Summary"; header.appendChild(title);
+      if (payload.demo) { const watermark = document.createElement("strong"); watermark.className = "demo-watermark"; watermark.textContent = "DEMO PREVIEW — not generated by the clinical pipeline"; header.appendChild(watermark); }
+      paragraph(header, `Clinic / department: ${missing(demographics.department)}`);
+      const idLine = document.createElement("p"); idLine.innerHTML = `Report ID: <span class="running-report">${escapeHtml(reportId)}</span> · Generated: ${escapeHtml(generated)} · Visit date: ${escapeHtml(missing(demographics.visit_date))}`; header.appendChild(idLine);
+      const identity = document.createElement("p");
+      const nameSpan = document.createElement("span"); nameSpan.id = "patient-header-name"; nameSpan.className = "running-patient"; nameSpan.textContent = missing(demographics.full_name);
+      const phoneSpan = document.createElement("span"); phoneSpan.id = "patient-header-phone"; phoneSpan.textContent = missing(demographics.phone);
+      const reveal = document.createElement("button"); reveal.type = "button"; reveal.className = "secondary patient-reveal"; reveal.id = "patient-reveal"; reveal.textContent = "Hide details";
+      identity.append("Patient: ", nameSpan, " · Phone: ", phoneSpan, " ", reveal); header.appendChild(identity); root.appendChild(header);
+      reveal.addEventListener("click", () => { patientHeaderRevealed = !patientHeaderRevealed; updatePatientHeaderMask(demographics); schedulePatientHeaderMask(demographics); });
+      updatePatientHeaderMask(demographics); schedulePatientHeaderMask(demographics);
+
+      const info = section("Patient information");
+      const weight = Number(demographics.weight_kg), height = Number(demographics.height_cm);
+      const bmi = weight > 0 && height > 0 ? `${(weight / ((height / 100) ** 2)).toFixed(1)} (calculated)` : "Not provided";
+      table(info, ["Detail", "Value"], [
+        ["Full name", demographics.full_name], ["Age / sex", `${missing(demographics.age)} / ${missing(demographics.sex)}`],
+        ["Patient ID", demographics.patient_id], ["Phone", demographics.phone], ["Address / city", demographics.address_city],
+        ["Weight", demographics.weight_kg == null ? null : `${demographics.weight_kg} kg`],
+        ["Height", demographics.height_cm == null ? null : `${demographics.height_cm} cm`], ["BMI", bmi],
+        ["Blood group", demographics.blood_group], ["Emergency contact", `${missing(demographics.emergency_contact_name)} / ${missing(demographics.emergency_contact_phone)}`],
+        ["Referring physician", demographics.referring_physician]
+      ]);
+      const listItems = (parent, items) => { if (!items?.length) { paragraph(parent, "Not provided"); return; }
+        const ul = document.createElement("ul"); items.forEach(item => { const li = document.createElement("li"); li.textContent = String(item); ul.appendChild(li); }); parent.appendChild(ul); };
+      const complaints = section("Chief complaints");
+      const assertionByEntity = new Map((patient.assertions || []).map(assertion => [assertion.entity_id, assertion.status]));
+      const complaintEntities = entities.filter(entity => entity.type === "SYMPTOM" || entity.type === "DISEASE");
+      const complaintRows = complaintEntities.map(entity => {
+        const linkedTime = (patient.time_expressions || []).find(time => (time.linked_entity_ids || []).includes(entity.id));
+        const assertion = assertionByEntity.get(entity.id);
+        const status = assertion === "NEGATED" ? "Absent" : assertion === "PRESENT" ? "Present" : assertion || "Unreviewed";
+        return [entity.span?.text, linkedTime?.raw_value || linkedTime?.normalized_value, status];
+      });
+      table(complaints, ["Complaint", "Duration", "Assertion status"], complaintRows);
+      const hpi = section("History of present illness"); paragraph(hpi, payload.summary || "Insufficient data.");
+      const evidence = payload.summary_items || [];
+      if (evidence.length) {
+        const evTitle = document.createElement("p"); evTitle.textContent = "Evidence-backed findings (select to highlight English source):"; hpi.appendChild(evTitle);
+        evidence.filter(item => !item.unsupported && item.evidence?.length).forEach(item => {
+          const row = document.createElement("p"); const button = document.createElement("button"); button.type = "button"; button.className = "text-link"; button.textContent = item.text;
+          button.addEventListener("click", () => { document.querySelector('[data-tab="summary-evidence"]').click(); highlightEvidence(item.evidence[0].start, item.evidence[0].end); });
+          const badge = document.createElement("span"); badge.className = "unreviewed"; badge.textContent = reviewStatusLabel(item.id); row.append(button, " ", badge); hpi.appendChild(row);
+        });
+      }
+      const past = section("Past medical history"); listItems(past, sections["Past History"] || []);
+      const family = section("Family history"); listItems(family, sections["Family History"] || []);
+      const medSection = section("Current medications");
+      const byId = new Map(entities.map(entity => [entity.id, entity]));
+      const meds = entities.filter(entity => entity.type === "MEDICATION").map(drug => {
+        const related = (patient.relations || []).filter(rel => rel.head_entity_id === drug.id);
+        const dose = related.find(rel => rel.relation_type === "MEDICATION-DOSAGE");
+        const freq = related.find(rel => rel.relation_type === "MEDICATION-FREQUENCY");
+        return [drug.span?.text, dose ? byId.get(dose.tail_entity_id)?.span?.text : null,
+          freq ? byId.get(freq.tail_entity_id)?.span?.text : null, "Narration"];
+      });
+      if (demographics.current_medications) meds.push([demographics.current_medications, null, null, "Patient form"]);
+      table(medSection, ["Drug", "Dose", "Frequency", "Source"], meds);
+      const allergySection = section("Allergies");
+      table(allergySection, ["Source", "Information"], [
+        ["Narration", (sections.Allergy || []).join("; ") || "Not provided"],
+        ["Patient form", demographics.known_allergies || "Not provided"]
+      ]);
+      const vitals = section("Vitals and test results");
+      table(vitals, ["Finding", "Status"], entities.filter(e => e.type === "TEST" || e.type === "TEST_RESULT").map(e => [e.span?.text, "Unreviewed"]));
+      const timeline = section("Timeline"); listItems(timeline, (patient.timeline || []).map(entry => entry.label));
+      const safety = section("Safety and completeness flags"); listItems(safety, (payload.flags || []).map(flag => flag.message));
+      const provenance = section("Pipeline provenance");
+      paragraph(provenance, `${payload.demo ? "DEMO PREVIEW" : "Pipeline output"} · Request ID: ${missing(payload.request_id)} · Language: ${missing(payload.language || selectedLanguage())} · Translation risk: ${missing(payload.translation_risk_level || translationRiskLevel)}`);
+      const review = section("Physician review status");
+      const reviewItems = visibleReviewItems(patient.section_items || []);
+      reviewItems.forEach(item => { const status = reviewStatusLabel(item.id); const row = document.createElement("p"); row.textContent = `${item.display_text} — ${status}`; const badge = document.createElement("span"); badge.className = "unreviewed"; badge.textContent = status; row.append(" ", badge); review.appendChild(row); });
+      if (!reviewItems.length) paragraph(review, "Not reviewed");
+      paragraph(review, `Audit chain: ${document.getElementById("audit-status").textContent || "Not verified"}`);
+      const audit = section("Audit chain status");
+      paragraph(audit, document.getElementById("audit-status").textContent || "Not verified");
+      const signoff = section("Physician sign-off");
+      paragraph(signoff, `Examining physician: ${missing(demographics.examining_physician)}`);
+      paragraph(signoff, "Signature: _______________________________________");
+      paragraph(signoff, "Date/time: _______________________________________");
+      const disclaimer = section("Required disclaimer");
+      paragraph(disclaimer, "Decision-support summary only. Not a diagnosis or treatment recommendation. Must be reviewed by a licensed physician.");
+    }
+
+    function updatePatientHeaderMask(demographics) {
+      const name = document.getElementById("patient-header-name"), phone = document.getElementById("patient-header-phone"), button = document.getElementById("patient-reveal");
+      if (!name || !phone || !button) return;
+      name.textContent = patientHeaderRevealed ? (demographics.full_name || "Not provided") : "••••••••";
+      phone.textContent = patientHeaderRevealed ? (demographics.phone || "Not provided") : "••••••••";
+      button.textContent = patientHeaderRevealed ? "Hide details" : "Reveal details";
+    }
+    function schedulePatientHeaderMask(demographics) {
+      clearTimeout(privacyMaskTimer);
+      privacyMaskTimer = setTimeout(() => { patientHeaderRevealed = false; updatePatientHeaderMask(demographics); }, 5 * 60 * 1000);
+    }
+    ["pointerdown", "keydown", "touchstart"].forEach(type => document.addEventListener(type, () => {
+      if (patientHeaderRevealed && document.getElementById("report-view").childElementCount) schedulePatientHeaderMask(lastReportPayload?.demographics || collectDemographics());
+    }, { passive: true }));
+
+    let lastReportPayload = null, lastReportOriginal = "", lastReportEnglish = "";
+    function buildPrintReport(payload, original, english) {
+      lastReportPayload = payload; lastReportOriginal = original; lastReportEnglish = english;
+      const root = document.getElementById("print-report"); root.replaceChildren();
+      const clone = document.getElementById("report-view").cloneNode(true);
+      const demo = payload.demographics || {};
+      const clonedName = clone.querySelector("#patient-header-name"), clonedPhone = clone.querySelector("#patient-header-phone");
+      if (clonedName) clonedName.textContent = demo.full_name || "Not provided";
+      if (clonedPhone) clonedPhone.textContent = demo.phone || "Not provided";
+      root.appendChild(clone);
+    }
+
+    const exportPrivacyNotice = "This file contains patient-identifiable information. Store and share it only according to your institution’s policy. Continue?";
+    document.getElementById("print-report-button").addEventListener("click", () => {
+      if (!lastReportPayload) return showToast("Analyze a case before printing a report.");
+      if (window.confirm(exportPrivacyNotice)) window.print();
+    });
+    document.getElementById("download-docx").addEventListener("click", async () => {
+      if (!lastReportPayload) return showToast("Analyze a case before downloading a report.");
+      if (!window.confirm(exportPrivacyNotice)) return;
+      try {
+        const report = { ...lastReportPayload,
+          review_status: visibleReviewItems(lastReportPayload.patient_record?.section_items || []).map(item => `${item.display_text} — ${reviewStatusLabel(item.id)}`),
+          audit_chain_status: document.getElementById("audit-status").textContent || "Not verified" };
+        const response = await fetch("http://127.0.0.1:8765/api/report/docx", { method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ demographics: lastReportPayload.demographics || collectDemographics(), report }) });
+        if (!response.ok) { const error = await response.json(); throw new Error(error.error || "DOCX export failed"); }
+        const blob = await response.blob(); const url = URL.createObjectURL(blob);
+        const link = document.createElement("a"); link.href = url; link.download = "cliniq-clinical-report.docx"; link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      } catch (error) { showToast(`DOCX export failed: ${error.message}`); }
+    });
+
+    function renderResult(text) {
+      const lower = text.toLowerCase();
+      const fever = lower.includes("fever");
+      const diabetes = lower.includes("diabetes");
+      const duration = (text.match(/(?:for|since)\s+(?:the\s+)?(?:\w+\s+)?\d+\s+\w+/i) || [])[0] || "Time not specified";
+      const cleanDuration = duration.replace(/^for\s+/i, "");
+      document.getElementById("summary").innerHTML = `<p><strong>DEMO PREVIEW — not generated by the clinical pipeline.</strong> ${fever ? "A fever mention appears in this sample." : "A reported concern is shown."}${duration !== "Time not specified" ? ` Duration text: <strong>${escapeHtml(cleanDuration)}</strong>.` : ""} ${diabetes ? "A diabetes mention appears and requires context review." : "No diabetes mention was detected in this sample."}</p><p>Decision support only. Not a diagnosis or treatment recommendation.</p>`;
+      document.getElementById("facts").innerHTML = [
+        fever ? `<div class="fact"><span class="fact-label">Fever</span><span class="assertion present"><i></i>Present</span></div>` : "",
+        diabetes ? `<div class="fact"><span class="fact-label">Diabetes</span><span class="assertion negated"><i></i>Negated / verify</span></div>` : "",
+        `<div class="fact"><span class="fact-label">Duration</span><span class="assertion possible"><i></i>${duration}</span></div>`
+      ].join("");
+      const highlighted = text.replace(/(fever|diabetes|5 days)/gi, "<mark>$1</mark>");
+      document.getElementById("evidence").innerHTML = `"${highlighted}"`;
+      const facts = [
+        fever ? ["Fever", "SYMPTOM", "Present", "0.94"] : null,
+        diabetes ? ["Diabetes", "DISEASE", "Negated", "0.91"] : null,
+        ["Duration", "DURATION", cleanDuration, "0.86"]
+      ].filter(Boolean);
+      document.getElementById("entity-list").innerHTML = facts.map(item => `<div class="fact"><span><strong>${item[0]}</strong><br><span class="fact-label">${item[1]} · confidence ${item[3]}</span></span><span class="mini-pill">${item[2]}</span></div>`).join("");
+      document.getElementById("assertion-list").innerHTML = facts.map(item => `<div class="fact"><span class="fact-label">${item[0]}</span><span class="assertion ${item[2] === "Negated" ? "negated" : item[2] === "Present" ? "present" : "possible"}"><i></i>${item[2]}</span></div>`).join("");
+      document.getElementById("timeline-list").innerHTML = `<div class="fact"><span><strong>${cleanDuration}</strong><br><span class="fact-label">Linked to fever · source evidence available</span></span><span class="mini-pill">Timeline item 1</span></div>`;
+      document.getElementById("review-list").textContent = "Review actions are unavailable in demo preview.";
+      document.getElementById("json-box").textContent = JSON.stringify({ raw_text: text, entities: facts.map(item => ({ text: item[0], type: item[1], confidence: Number(item[3]) })), disclaimer: "Decision support only - not a diagnosis." }, null, 2);
+      results.classList.add("visible");
+      results.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    async function requestPatientRecord(text, demographics) {
+      try {
+        const response = await fetch("http://127.0.0.1:8765/api/analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: narration.value.trim(), language: selectedLanguage(),
+            demographics,
+            english_text: selectedLanguage() === "English" ? undefined : translationText.value.trim(),
+            translation_token: selectedLanguage() === "English" ? undefined : translationToken })
+        });
+        const payload = await response.json();
+        if (!response.ok) return { error: payload.error || "Analysis request failed" };
+        return { connected: true, payload };
+      } catch {
+        return { connected: false };
+      }
+    }
+
+    analyze.addEventListener("click", async () => {
+      if (!validateDemographics()) return;
+      analyze.disabled = true;
+      progress.classList.add("visible");
+      results.classList.remove("visible");
+      const rows = [...document.querySelectorAll(".stage")];
+      for (let i = 0; i < stages.length; i += 1) {
+        rows[i].classList.add("active");
+        progressText.textContent = stages[i];
+        progressCount.textContent = `${i + 1} / 9`;
+        progressBar.style.width = `${((i + 1) / stages.length) * 100}%`;
+        await new Promise(resolve => setTimeout(resolve, 260));
+        rows[i].classList.remove("active");
+        rows[i].classList.add("done");
+      }
+      const sourceText = narration.value.trim();
+      const pipelineText = selectedLanguage() === "English" ? sourceText : (translationText.value.trim() || sourceText);
+      const demographics = collectDemographics();
+      const apiResult = await requestPatientRecord(pipelineText, demographics);
+      if (apiResult.error) {
+        showToast(`Analysis failed: ${apiResult.error}`);
+        progress.classList.remove("visible");
+        updateAnalyzeButton();
+        return;
+      }
+      if (apiResult.connected) {
+        const payload = apiResult.payload;
+        const patientRecord = payload.patient_record;
+        payload.language = selectedLanguage();
+        payload.translation_risk_level = selectedLanguage() === "English" ? "Not applicable" : translationRiskLevel;
+        payload.report_id = `CLQ-RPT-${String(payload.request_id || "LOCAL").slice(-8).toUpperCase()}`;
+        if (payload.demographics?.patient_id) document.getElementById("patient-id").value = payload.demographics.patient_id;
+        results.classList.add("visible");
+        document.getElementById("summary").textContent = payload.summary || "Insufficient data.";
+        document.getElementById("source-original").textContent = payload.original_text || sourceText;
+        document.getElementById("source-english").textContent = payload.english_text || pipelineText;
+        document.getElementById("evidence").textContent = "Select a finding to highlight its source evidence.";
+        document.getElementById("facts").innerHTML = (payload.summary_items || []).filter(item => !item.unsupported && item.evidence?.length).map(item => `<button class="fact" data-start="${item.evidence[0].start}" data-end="${item.evidence[0].end}"><span><strong>${escapeHtml(item.text)}</strong><br><span class="fact-label">${escapeHtml(item.section)} · evidence available</span></span></button>`).join("") || "No evidence-supported summary items.";
+        document.querySelectorAll("#facts [data-start]").forEach(button => button.addEventListener("click", () => highlightEvidence(Number(button.dataset.start), Number(button.dataset.end))));
+        document.getElementById("json-box").textContent = JSON.stringify({ patient_record: patientRecord, disclaimer: payload.disclaimer }, null, 2);
+        const assertionByEntity = new Map((patientRecord.assertions || []).map(assertion => [assertion.entity_id, assertion.status]));
+        const visibleEntities = [];
+        const entityIndexByKey = new Map();
+        (patientRecord.entities || []).forEach(entity => {
+          const assertion = assertionByEntity.get(entity.id) || "Unreviewed";
+          const key = `${entity.type || "Entity"}\u0000${assertion}\u0000${(entity.normalized_text || entity.span?.text || "").trim().replace(/\s+/g, " ").toLocaleLowerCase()}`;
+          const existingIndex = entityIndexByKey.get(key);
+          if (existingIndex === undefined) {
+            entityIndexByKey.set(key, visibleEntities.length);
+            visibleEntities.push({ ...entity, assertion, mentions: 1 });
+          } else {
+            visibleEntities[existingIndex].mentions += 1;
+          }
+        });
+        document.getElementById("entity-list").innerHTML = visibleEntities.map(entity => `<div class="fact"><span><strong>${escapeHtml(entity.span?.text || "Not provided")}</strong><br><span class="fact-label">${escapeHtml(entity.type || "Entity")} · confidence ${Number(entity.confidence || 0).toFixed(2)}${entity.mentions > 1 ? ` · ${entity.mentions} mentions` : ""}</span></span><span class="mini-pill">${escapeHtml(entity.assertion)}</span></div>`).join("") || "No entities extracted.";
+        document.getElementById("assertion-list").innerHTML = visibleEntities.map(entity => {
+          const status = entity.assertion || "unreviewed";
+          const css = /negat/i.test(status) ? "negated" : /present|affirm/i.test(status) ? "present" : "possible";
+          return `<div class="fact"><span class="fact-label">${escapeHtml(entity.span?.text || "Not provided")}</span><span class="assertion ${css}"><i></i>${escapeHtml(status)}</span></div>`;
+        }).join("") || "No assertions extracted.";
+        document.getElementById("timeline-list").innerHTML = (patientRecord.timeline || []).map(item => `<div class="fact"><span><strong>${escapeHtml(item.label || "Not provided")}</strong><br><span class="fact-label">${escapeHtml(item.raw_text || "Time expression")}</span></span><span class="mini-pill">Timeline item ${escapeHtml(String(item.order ?? ""))}</span></div>`).join("") || "No timeline items extracted.";
+        document.getElementById("flags-list").innerHTML = (payload.flags || []).map(flag => `<div class="fact"><strong>${escapeHtml(flag.id)}</strong><span>${escapeHtml(flag.message)}</span></div>`).join("") || "No flags.";
+        reviewStatusByItem.clear();
+        renderFormalReport(payload, payload.demographics || demographics);
+        buildPrintReport(payload, sourceText, pipelineText);
+        document.getElementById("demo-banner").hidden = true;
+        document.getElementById("review-list").innerHTML = visibleReviewItems(patientRecord.section_items || []).map(item => `<div class="review-row" data-row-item="${item.id}"><span>${escapeHtml(item.display_text)} <span class="mini-pill" data-review-status>Pending</span></span><span class="review-actions"><button class="secondary" data-review="accept" data-item="${item.id}">Accept</button><button class="secondary" data-review="edit" data-item="${item.id}">Edit</button><button class="secondary" data-review="reject" data-item="${item.id}">Reject</button><button class="secondary" data-review="verify" data-item="${item.id}">Verify</button></span></div>`).join("") || "No reviewable facts extracted.";
+        wireReviewActions();
+        loadReviewStatuses();
+        document.querySelector(".results-top .mini-pill").textContent = `Pipeline output · ${payload.request_id || "request id unavailable"} · ${payload.generated_at || "timestamp unavailable"}`;
+        showToast("Connected pipeline response loaded for physician review.");
+        results.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        renderResult(pipelineText);
+        document.getElementById("demo-banner").hidden = false;
+        document.querySelector(".results-top .mini-pill").textContent = "DEMO PREVIEW — not generated by the clinical pipeline";
+        document.getElementById("summary").textContent = "DEMO PREVIEW — not generated by the clinical pipeline. Start the local API to generate pipeline output.";
+        const demoPayload = { demo: true, report_id: `CLQ-RPT-${crypto.randomUUID().slice(0, 8).toUpperCase()}`,
+          request_id: "not available", generated_at: new Date().toLocaleString(), language: selectedLanguage(),
+          translation_risk_level: translationRiskLevel, summary: document.getElementById("summary").textContent,
+          disclaimer: "Decision-support summary only. Not a diagnosis or treatment recommendation. Must be reviewed by a licensed physician.",
+          patient_record: { raw_text: pipelineText, entities: [], relations: [], timeline: [], section_items: [], sections: {} },
+          demographics, flags: [] };
+        renderFormalReport(demoPayload, demographics);
+        buildPrintReport(demoPayload, sourceText, pipelineText);
+        showToast("API unavailable: showing demo preview only.");
+      }
+      progress.classList.remove("visible");
+      updateAnalyzeButton();
+    });
+
+    async function wireReviewActions() {
+      document.querySelectorAll("#review-list [data-review]").forEach(button => button.addEventListener("click", async () => {
+        const reviewer = document.getElementById("reviewer-name").value.trim();
+        if (!reviewer) { showToast("Enter a reviewer name before recording an action."); return; }
+        const newValue = button.dataset.review === "edit" ? window.prompt("Enter corrected text") : undefined;
+        if (button.dataset.review === "edit" && newValue === null) return;
+        try {
+          const response = await fetch("http://127.0.0.1:8765/api/review", { method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ action: button.dataset.review, item_id: button.dataset.item, reviewer, new_value: newValue }) });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || "Review action failed");
+          button.parentElement.parentElement.dataset.status = button.dataset.review;
+          reviewStatusByItem.set(button.dataset.item, button.dataset.review);
+          button.parentElement.parentElement.querySelector("[data-review-status]").textContent = reviewStatusLabel(button.dataset.item);
+          if (lastReportPayload) { renderFormalReport(lastReportPayload, lastReportPayload.demographics); buildPrintReport(lastReportPayload, lastReportOriginal, lastReportEnglish); }
+          showToast(`${button.dataset.review} saved to audit log.`);
+        } catch (error) { showToast(`Review action failed: ${error.message}`); }
+      }));
+    }
+    async function loadReviewStatuses() {
+      try {
+        const response = await fetch("http://127.0.0.1:8765/api/review");
+        const payload = await response.json();
+        const latest = new Map();
+        for (const action of payload.actions || []) latest.set(action.item_id, action.action);
+        reviewStatusByItem.clear();
+        for (const [id, status] of latest) reviewStatusByItem.set(id, status);
+        document.querySelectorAll("[data-row-item]").forEach(row => {
+          const status = latest.get(row.dataset.rowItem);
+          if (status) row.querySelector("[data-review-status]").textContent = reviewStatusLabel(row.dataset.rowItem);
+        });
+        if (lastReportPayload) { renderFormalReport(lastReportPayload, lastReportPayload.demographics); buildPrintReport(lastReportPayload, lastReportOriginal, lastReportEnglish); }
+      } catch { /* the audit verification control reports service availability */ }
+    }
+    document.getElementById("verify-audit").addEventListener("click", async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:8765/api/review/verify");
+        const result = await response.json();
+        document.getElementById("audit-status").textContent = result.valid ? `Audit chain valid (${result.entries} entries).` : `Audit chain broken at entry ${result.first_broken_index}.`;
+        if (lastReportPayload) { renderFormalReport(lastReportPayload, lastReportPayload.demographics); buildPrintReport(lastReportPayload, lastReportOriginal, lastReportEnglish); }
+      } catch (error) { document.getElementById("audit-status").textContent = `Verification unavailable: ${error.message}`; }
+    });
+
+    document.getElementById("clear-patient-data").addEventListener("click", () => {
+      if (!window.confirm("Clear all patient details, narration, translation, report results, and session data from this page?")) return;
+      clearTimeout(privacyMaskTimer);
+      sessionStorage.clear();
+      for (const id of demographicFields) {
+        const field = document.getElementById(id);
+        if (field.type === "checkbox") field.checked = false;
+        else field.value = id === "visit-date" ? localDateString() : "";
+      }
+      document.getElementById("patient-age").readOnly = false;
+      narration.value = ""; translationText.value = ""; translationToken = null; translationConfirm.checked = false;
+      translationRiskLevel = "Not provided"; reviewStatusByItem.clear();
+      document.getElementById("results").classList.remove("visible");
+      document.getElementById("report-view").replaceChildren(); document.getElementById("print-report").replaceChildren();
+      document.getElementById("json-box").textContent = "";
+      document.getElementById("audit-status").textContent = "";
+      for (const id of ["summary", "facts", "source-original", "source-english", "evidence", "entity-list", "assertion-list", "timeline-list", "flags-list", "review-list", "original-text", "back-translation", "translation-risk", "translation-status"]) {
+        document.getElementById(id).replaceChildren();
+      }
+      document.getElementById("patient-reveal")?.remove();
+      document.getElementById("demo-banner").hidden = true;
+      document.getElementById("reviewer-name").value = ""; document.getElementById("translation-reviewer").value = "";
+      localStorage.removeItem("cliniq-draft");
+      document.querySelectorAll(".stage").forEach(row => row.classList.remove("active", "done"));
+      patientHeaderRevealed = true; lastReportPayload = null; lastReportOriginal = ""; lastReportEnglish = "";
+      progressBar.style.width = "0%"; progressCount.textContent = "0 / 9"; progressText.textContent = "Preparing pipeline…";
+      document.getElementById("patient-errors").textContent = "";
+      count.textContent = "0 / 5,000"; demographicsValid = false; updateAnalyzeButton();
+    });
+
+    document.querySelectorAll(".result-tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".result-tab").forEach(item => item.classList.remove("active"));
+        document.querySelectorAll(".result-pane").forEach(item => item.classList.remove("active"));
+        tab.classList.add("active");
+        document.querySelector(`[data-pane="${tab.dataset.tab}"]`).classList.add("active");
+      });
+    });
+  </script>
+</body>
+</html>
+>>>>>>> b3cb1b5980c1b05cf03e41ceded443dec2b0f640

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2026-10-31 11:10:17.883 Uvicorn server started on :::8501
 
   You can now view your Streamlit app in your browser.
@@ -7,3 +8,14 @@
   External URL: http://49.204.87.250:8501
 
   Stopping...
+=======
+2026-10-31 11:10:17.883 Uvicorn server started on :::8501
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://10.10.0.185:8501
+  External URL: http://49.204.87.250:8501
+
+  Stopping...
+>>>>>>> b3cb1b5980c1b05cf03e41ceded443dec2b0f640
