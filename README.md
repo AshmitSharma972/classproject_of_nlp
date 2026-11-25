@@ -1,4 +1,4 @@
-# ClinIQ
+# Patient Case-Taking Software using NLP(ClinIQ)
 
 ClinIQ is a local, multilingual clinical information-assistance prototype. It extracts and organizes reported information for physician review. **It is not a diagnostic tool and does not diagnose or recommend treatment.** Every generated report must retain the decision-support disclaimer and be reviewed by a qualified clinician.
 
